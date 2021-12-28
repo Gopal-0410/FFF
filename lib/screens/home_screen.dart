@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
       'Gun Skins',
       'Rare Emotes',
       'Refer',
-      'How To Use?'
+      'How To Use?',
     ];
 
     return Scaffold(
