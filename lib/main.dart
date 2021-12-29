@@ -14,25 +14,35 @@ import 'package:fff/screens/splash_screen.dart';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
+import '../flutter_Adsdk/services/internet_connection.dart';
 
 import 'screens/end_screen.dart';
+
+var internet_status;
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  Future<bool> internetConnection() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile) {
-      return true;
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      return true;
-    } else if (connectivityResult == ConnectivityResult.none) {
-      return false;
-    }
-    return false;
+Future getinternetstate() async{
+  InternetConnection internetConnection = InternetConnection();
+  internet_status = await internetConnection.internetConnection();
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyApp createState() => _MyApp();
+}
+
+class _MyApp extends State<MyApp> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getinternetstate();
+    super.initState();
   }
 
   @override
@@ -61,7 +71,8 @@ class MyApp extends StatelessWidget {
         '/END': (BuildContext context) => EndScreen(),
         '/Start': (BuildContext context) => StartScreen(),
       },
-      home: SplashScreen(),
+      home: internet_status == true ? SplashScreen() : Container(child: Text('No Internet'),)
     );
   }
 }
+

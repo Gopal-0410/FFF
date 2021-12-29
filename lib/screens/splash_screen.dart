@@ -14,17 +14,6 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-var internetStatus;
-Future getInternetConnection() async {
-  try {
-    InternetConnection internetConnection = InternetConnection();
-    internetStatus = await internetConnection.internetConnection();
-  } catch (e) {
-    print(e);
-  }
-  print(internetStatus);
-}
-
 class _SplashScreenState extends State<SplashScreen> {
   var Status;
 
@@ -44,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    getInternetConnection();
     getApiData();
     super.initState();
     Timer(
@@ -55,8 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return internetStatus
-        ? Container(
+        return Container(
             height: double.maxFinite,
             width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
@@ -104,8 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ],
             ),
-          )
-        : CircularProgressIndicator();
+          );
   }
 }
 
