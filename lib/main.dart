@@ -56,44 +56,56 @@ class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getinternetstate(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container();
-        } else if (snapshot.hasError) {
-          return Container();
-        } else {
-          return MaterialApp(
-            title: 'FFF SKINS',
-            theme: ThemeData(
-              fontFamily: 'Muli',
-              primaryColor: Colors.blueGrey,
-              primarySwatch: Colors.blueGrey,
-            ),
-            routes: <String, WidgetBuilder>{
-              '/homeScreen': (BuildContext context) => HomeScreen(),
-              '/Trending': (BuildContext context) => const TrendingScreen(),
-              '/Pro Dress': (BuildContext context) => ProDressScreen(),
-              '/Gun Skins': (BuildContext context) => GunScreen(),
-              '/Rare Emotes': (BuildContext context) =>
-                  const RareEmotesScreen(),
-              '/Refer': (BuildContext context) => const ReferScreen(),
-              '/Elite Pass': (BuildContext context) => const ElitePassScreen(),
-              '/How To Use?': (BuildContext context) => const HowToUseScreen(),
-              '/Incubator': (BuildContext context) => IncubatorScreen(),
-              '/Faded Wheel': (BuildContext context) =>
-                  const FadedWheelScreen(),
-              '/Events': (BuildContext context) => const EventsScreen(),
-              '/END': (BuildContext context) => const EndScreen(),
-              '/Start': (BuildContext context) => const StartScreen(),
-              DialogBox.routName: (BuildContext context) => const DialogBox(),
-            },
-            home: internet_status == true ? SplashScreen() : Center(
-              child: Container(child: ElevatedButton(child: Text('No Internet Press!'), onPressed: (){
-                setState(() {
-                },);
-              },),),
-            ),
-        );
-      }
-    });
+        future: getinternetstate(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container();
+          } else if (snapshot.hasError) {
+            return Container();
+          } else {
+            return MaterialApp(
+              title: 'FFF SKINS',
+              theme: ThemeData(
+                fontFamily: 'Muli',
+                primaryColor: Colors.blueGrey,
+                primarySwatch: Colors.blueGrey,
+              ),
+              routes: <String, WidgetBuilder>{
+                '/homeScreen': (BuildContext context) => HomeScreen(),
+                '/Trending': (BuildContext context) => const TrendingScreen(),
+                '/Pro Dress': (BuildContext context) => ProDressScreen(),
+                '/Gun Skins': (BuildContext context) => GunScreen(),
+                '/Rare Emotes': (BuildContext context) =>
+                    const RareEmotesScreen(),
+                '/Refer': (BuildContext context) => const ReferScreen(),
+                '/Elite Pass': (BuildContext context) =>
+                    const ElitePassScreen(),
+                '/How To Use?': (BuildContext context) =>
+                    const HowToUseScreen(),
+                '/Incubator': (BuildContext context) => IncubatorScreen(),
+                '/Faded Wheel': (BuildContext context) =>
+                    const FadedWheelScreen(),
+                '/Events': (BuildContext context) => const EventsScreen(),
+                '/END': (BuildContext context) => const EndScreen(),
+                '/Start': (BuildContext context) => const StartScreen(),
+                DialogBox.routName: (BuildContext context) => const DialogBox(),
+              },
+              home: internet_status == true
+                  ? SplashScreen()
+                  : Center(
+                      child: Container(
+                        child: ElevatedButton(
+                          child: Text('No Internet Press!'),
+                          onPressed: () {
+                            setState(
+                              () {},
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+            );
+          }
+        });
+  }
+}
