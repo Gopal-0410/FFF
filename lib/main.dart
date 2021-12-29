@@ -38,13 +38,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(future: getinternetstate(),builder: (context, snapshot){
@@ -79,7 +72,12 @@ class _MyApp extends State<MyApp> {
               '/END': (BuildContext context) => EndScreen(),
               '/Start': (BuildContext context) => StartScreen(),
             },
-            home: internet_status == true ? SplashScreen() : Container(child: Text('No Internet'),)
+            home: internet_status == true ? SplashScreen() : Center(
+              child: Container(child: ElevatedButton(child: Text('No Internet Press!'), onPressed: (){
+                setState(() {
+                },);
+              },),),
+            ),
         );
       }
     });
