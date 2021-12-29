@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkHelper {
   String url;
@@ -19,8 +20,11 @@ class NetworkHelper {
       'DBMNBXRY4500991G': appModel,
     });
     if (response.statusCode == 200) {
-      String data = response.body;
-      return jsonDecode(data);
+      var data = jsonDecode(response.body);
+      var Status = data['STATUS'];
+      final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setBool('STATUS', Status);
+      return data;
     } else {
       throw Exception('Failed To load Api');
     }

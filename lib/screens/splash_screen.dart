@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/network_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future getApiData() async {
+    print('Api call from here');
     NetworkHelper networkHelper =
         NetworkHelper('https://adzzapps.com/AppsManager/api/v1/get_app.php');
     var apiData = await networkHelper.getApiData(
@@ -20,13 +22,15 @@ class _SplashScreenState extends State<SplashScreen> {
       appOpenID: '26894',
       appModel: 'TRSOFTAG12789I',
     );
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var Status = sharedPreferences.getBool('STATUS');
+    print(Status);
     return apiData;
   }
 
   @override
   void initState() {
     super.initState();
-
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
@@ -42,6 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
           return const CircularProgressIndicator();
         } else {
           if (snapshot.hasError) {
+            print(snapshot.error);
             return const Scaffold(
               backgroundColor: Colors.black,
               body: Center(
@@ -52,57 +57,56 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           } else {
             var response = snapshot.data;
-            print(response);
-          }
-          return Container(
-            height: double.maxFinite,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/images/bgimage.jpg'),
+            return Container(
+              height: double.maxFinite,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/bgimage.jpg'),
+                ),
               ),
-            ),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.35),
-                  //  duration: Duration(seconds: 2),
-                  height: 150,
-                  width: 150,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage('assets/images/playstore.png'),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.35),
+                    //  duration: Duration(seconds: 2),
+                    height: 150,
+                    width: 150,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/playstore.png'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: const Text(
-                    'FFF:SKIN TOOL',
-                    style: TextStyle(
-                        fontFamily: 'Arial',
-                        fontSize: 20,
-                        color: Colors.white,
-                        decoration: TextDecoration.none),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: const Text(
+                      'FFF:SKIN TOOL',
+                      style: TextStyle(
+                          fontFamily: 'Arial',
+                          fontSize: 20,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.25),
-                  height: 50,
-                  width: 50,
-                  child: const CircularProgressIndicator(
-                    color: Colors.white,
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.25),
+                    height: 50,
+                    width: 50,
+                    child: const CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
+                ],
+              ),
+            );
+          }
         }
       },
     );
