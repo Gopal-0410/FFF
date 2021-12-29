@@ -15,19 +15,14 @@ import 'package:fff/screens/starts_screen.dart';
 import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
+import 'screens/dialogbox.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_Adsdk/services/share_preferences_data_getter.dart';
 
 import 'screens/end_screen.dart';
 
-var internet_status;
-
 void main() {
   runApp(MyApp());
-}
-
-Future getinternetstate() async{
-  InternetConnection internetConnection = InternetConnection();
-  internet_status = await internetConnection.internetConnection();
-  print(internet_status);
 }
 
 class MyApp extends StatefulWidget {
@@ -38,39 +33,60 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
+  var internet_status;
+  var status;
+
+  Future getinternetstate() async {
+    InternetConnection internetConnection = InternetConnection();
+    internet_status = await internetConnection.internetConnection();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+    status = await sp.getStatus();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(future: getinternetstate(),builder: (context, snapshot){
-      if (snapshot.connectionState == ConnectionState.waiting){
-        return Container();
-      }
-      else if (snapshot.hasError){
-        return Container();
-      }
-      else{
-        return MaterialApp(
+    return FutureBuilder(
+      future: getinternetstate(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container();
+        } else if (snapshot.hasError) {
+          return Container();
+        } else {
+          return MaterialApp(
             title: 'FFF SKINS',
             theme: ThemeData(
-              fontFamily: 'Muli', primaryColor: Colors.blueGrey,
+              fontFamily: 'Muli',
+              primaryColor: Colors.blueGrey,
               primarySwatch: Colors.blueGrey,
-              //    canvasColor: Colors.purple.shade100,
-              // accentColor: Colors.purple.shade300
             ),
             routes: <String, WidgetBuilder>{
-              // ignore: unnecessary_new
               '/homeScreen': (BuildContext context) => HomeScreen(),
               '/Trending': (BuildContext context) => const TrendingScreen(),
               '/Pro Dress': (BuildContext context) => ProDressScreen(),
               '/Gun Skins': (BuildContext context) => GunScreen(),
-              '/Rare Emotes': (BuildContext context) => RareEmotesScreen(),
-              '/Refer': (BuildContext context) => ReferScreen(),
-              '/Elite Pass': (BuildContext context) => ElitePassScreen(),
-              '/How To Use?': (BuildContext context) => HowToUseScreen(),
+              '/Rare Emotes': (BuildContext context) =>
+                  const RareEmotesScreen(),
+              '/Refer': (BuildContext context) => const ReferScreen(),
+              '/Elite Pass': (BuildContext context) => const ElitePassScreen(),
+              '/How To Use?': (BuildContext context) => const HowToUseScreen(),
               '/Incubator': (BuildContext context) => IncubatorScreen(),
-              '/Faded Wheel': (BuildContext context) => FadedWheelScreen(),
-              '/Events': (BuildContext context) => EventsScreen(),
-              '/END': (BuildContext context) => EndScreen(),
-              '/Start': (BuildContext context) => StartScreen(),
+              '/Faded Wheel': (BuildContext context) =>
+                  const FadedWheelScreen(),
+              '/Events': (BuildContext context) => const EventsScreen(),
+              '/END': (BuildContext context) => const EndScreen(),
+              '/Start': (BuildContext context) => const StartScreen(),
+              DialogBox.routName: (BuildContext context) => const DialogBox(),
             },
             home: internet_status == true ? SplashScreen() : Center(
               child: Container(child: ElevatedButton(child: Text('No Internet Press!'), onPressed: (){
@@ -81,6 +97,3 @@ class _MyApp extends State<MyApp> {
         );
       }
     });
-  }
-}
-

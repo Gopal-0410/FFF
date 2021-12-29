@@ -22,48 +22,46 @@ class NetworkHelper {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
 
-      // Getting App Setting Data From Api
-      var Status = data['STATUS'];
-      var app_name = data['APP_SETTINGS']['app_name'];
-      var app_accountName = data['APP_SETTINGS']['app_accountName'];
-      var app_accountLink = data['APP_SETTINGS']['app_accountLink'];
-      var app_packageName = data['APP_SETTINGS']['app_packageName'];
-      var app_logo = data['APP_SETTINGS']['app_logo'];
-      var app_status = data['APP_SETTINGS']['app_status'];
-      var app_privacyPolicyLink = data['APP_SETTINGS']['app_privacyPolicyLink'];
-      var app_needInternet = data['APP_SETTINGS']['app_needInternet'];
-      var app_updateAppDialogStatus =
-          data['APP_SETTINGS']['app_updateAppDialogStatus'];
-      var app_versionCode = data['APP_SETTINGS']['app_versionCode'];
-      var app_redirectOtherAppStatus =
+      var status = data['STATUS'];
+      var appName = data['APP_SETTINGS']['app_name'];
+      var appAccountName = data['APP_SETTINGS']['app_accountName'];
+      var appAccountLink = data['APP_SETTINGS']['app_accountLink'];
+      var appPackageName = data['APP_SETTINGS']['app_packageName'];
+      var appLogo = data['APP_SETTINGS']['app_logo'];
+      var appStatus = data['APP_SETTINGS']['app_status'];
+      var appPrivacyPolicyLink = data['APP_SETTINGS']['app_privacyPolicyLink'];
+      var appNeedInternet = data['APP_SETTINGS']['app_needInternet'];
+      var appUpdateAppDialogStatus = data['APP_SETTINGS']['app_updateAppDialogStatus'];
+      var appVersionCode = data['APP_SETTINGS']['app_versionCode'];
+      var appRedirectOtherAppStatus =
           data['APP_SETTINGS']['app_redirectOtherAppStatus'];
-      var app_newPackageName = data['APP_SETTINGS']['app_newPackageName'];
-      var app_dialogBeforeAdShow =
+      var appNewPackageName = data['APP_SETTINGS']['app_newPackageName'];
+      var appDialogBeforeAdShow =
           data['APP_SETTINGS']['app_dialogBeforeAdShow'];
-      var app_adShowStatus = data['APP_SETTINGS']['app_adShowStatus'];
-      var app_AppOpenAdStatus = data['APP_SETTINGS']['app_AppOpenAdStatus'];
-      var app_howShowAd = data['APP_SETTINGS']['app_howShowAd'];
-      var app_adPlatformSequence =
+      var appAdShowStatus = data['APP_SETTINGS']['app_adShowStatus'];
+      var appAppOpenAdStatus = data['APP_SETTINGS']['app_AppOpenAdStatus'];
+      var appHowShowAd = data['APP_SETTINGS']['app_howShowAd'];
+      var appAdPlatformSequence =
           data['APP_SETTINGS']['app_adPlatformSequence'];
-      var app_alernateAdShow = data['APP_SETTINGS']['app_alernateAdShow'];
-      var app_howShowAdInterstitial =
+      var appAlernateAdShow = data['APP_SETTINGS']['app_alernateAdShow'];
+      var appHowShowAdInterstitial =
           data['APP_SETTINGS']['app_howShowAdInterstitial'];
-      var app_adPlatformSequenceInterstitial =
+      var appAdPlatformSequenceInterstitial =
           data['APP_SETTINGS']['app_adPlatformSequenceInterstitial'];
-      var app_alernateAdShowInterstitial =
+      var appAlernateAdShowInterstitial =
           data['APP_SETTINGS']['app_alernateAdShowInterstitial'];
-      var app_howShowAdNative = data['APP_SETTINGS']['app_howShowAdNative'];
-      var app_adPlatformSequenceNative =
+      var appHowShowAdNative = data['APP_SETTINGS']['app_howShowAdNative'];
+      var appAdPlatformSequenceNative =
           data['APP_SETTINGS']['app_adPlatformSequenceNative'];
-      var app_alernateAdShowNative =
+      var appAlernateAdShowNative =
           data['APP_SETTINGS']['app_alernateAdShowNative'];
-      var app_howShowAdBanner = data['APP_SETTINGS']['app_howShowAdBanner'];
-      var app_adPlatformSequenceBanner =
+      var appHowShowAdBanner = data['APP_SETTINGS']['app_howShowAdBanner'];
+      var appAdPlatformSequenceBanner =
           data['APP_SETTINGS']['app_adPlatformSequenceBanner'];
-      var app_alernateAdShowBanner =
+      var appAlernateAdShowBanner =
           data['APP_SETTINGS']['app_alernateAdShowBanner'];
-      var app_mainClickCntSwAd = data['APP_SETTINGS']['app_mainClickCntSwAd'];
-      var app_innerClickCntSwAd = data['APP_SETTINGS']['app_innerClickCntSwAd'];
+      var appMainClickCntSwAd = data['APP_SETTINGS']['app_mainClickCntSwAd'];
+      var appInnerClickCntSwAd = data['APP_SETTINGS']['app_innerClickCntSwAd'];
 
       //Getting Placements Data From Api
 
@@ -90,49 +88,49 @@ class NetworkHelper {
       // App setting data set in the Shared Preference
       final SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      sharedPreferences.setBool('STATUS', Status);
-      sharedPreferences.setString('app_name', app_name);
-      sharedPreferences.setString('app_accountName', app_accountName);
-      sharedPreferences.setString('app_accountLink', app_accountLink);
-      sharedPreferences.setString('app_packageName', app_packageName);
-      sharedPreferences.setString('app_logo', app_logo);
-      sharedPreferences.setString('app_status', app_status);
+      sharedPreferences.setBool('STATUS', status);
+      sharedPreferences.setString('app_name', appName);
+      sharedPreferences.setString('app_accountName', appAccountName);
+      sharedPreferences.setString('app_accountLink', appAccountLink);
+      sharedPreferences.setString('app_packageName', appPackageName);
+      sharedPreferences.setString('app_logo', appLogo);
+      sharedPreferences.setString('app_status', appStatus);
       sharedPreferences.setString(
-          'app_privacyPolicyLink', app_privacyPolicyLink);
-      sharedPreferences.setString('app_needInternet', app_needInternet);
+          'app_privacyPolicyLink', appPrivacyPolicyLink);
+      sharedPreferences.setString('app_needInternet', appNeedInternet);
       sharedPreferences.setString(
-          'app_updateAppDialogStatus', app_updateAppDialogStatus);
-      sharedPreferences.setString('app_versionCode', app_versionCode);
+          'app_updateAppDialogStatus', appUpdateAppDialogStatus);
+      sharedPreferences.setString('app_versionCode', appVersionCode);
       sharedPreferences.setString(
-          'app_redirectOtherAppStatus', app_redirectOtherAppStatus);
-      sharedPreferences.setString('app_newPackageName', app_newPackageName);
+          'app_redirectOtherAppStatus', appRedirectOtherAppStatus);
+      sharedPreferences.setString('app_newPackageName', appNewPackageName);
       sharedPreferences.setString(
-          'app_dialogBeforeAdShow', app_dialogBeforeAdShow);
-      sharedPreferences.setString('app_adShowStatus', app_adShowStatus);
-      sharedPreferences.setString('app_AppOpenAdStatus', app_AppOpenAdStatus);
-      sharedPreferences.setString('app_howShowAd', app_howShowAd);
+          'app_dialogBeforeAdShow', appDialogBeforeAdShow);
+      sharedPreferences.setString('app_adShowStatus', appAdShowStatus);
+      sharedPreferences.setString('app_AppOpenAdStatus', appAppOpenAdStatus);
+      sharedPreferences.setString('app_howShowAd', appHowShowAd);
       sharedPreferences.setString(
-          'app_adPlatformSequence', app_adPlatformSequence);
-      sharedPreferences.setString('app_alernateAdShow', app_alernateAdShow);
+          'app_adPlatformSequence', appAdPlatformSequence);
+      sharedPreferences.setString('app_alernateAdShow', appAlernateAdShow);
       sharedPreferences.setString(
-          'app_howShowAdInterstitial', app_howShowAdInterstitial);
+          'app_howShowAdInterstitial', appHowShowAdInterstitial);
       sharedPreferences.setString('app_adPlatformSequenceInterstitial',
-          app_adPlatformSequenceInterstitial);
+          appAdPlatformSequenceInterstitial);
       sharedPreferences.setString(
-          'app_alernateAdShowInterstitial', app_alernateAdShowInterstitial);
-      sharedPreferences.setString('app_howShowAdNative', app_howShowAdNative);
+          'app_alernateAdShowInterstitial', appAlernateAdShowInterstitial);
+      sharedPreferences.setString('app_howShowAdNative', appHowShowAdNative);
       sharedPreferences.setString(
-          'app_adPlatformSequenceNative', app_adPlatformSequenceNative);
+          'app_adPlatformSequenceNative', appAdPlatformSequenceNative);
       sharedPreferences.setString(
-          'app_alernateAdShowNative', app_alernateAdShowNative);
-      sharedPreferences.setString('app_howShowAdBanner', app_howShowAdBanner);
+          'app_alernateAdShowNative', appAlernateAdShowNative);
+      sharedPreferences.setString('app_howShowAdBanner', appHowShowAdBanner);
       sharedPreferences.setString(
-          'app_adPlatformSequenceBanner', app_adPlatformSequenceBanner);
+          'app_adPlatformSequenceBanner', appAdPlatformSequenceBanner);
       sharedPreferences.setString(
-          'app_alernateAdShowBanner', app_alernateAdShowBanner);
-      sharedPreferences.setString('app_mainClickCntSwAd', app_mainClickCntSwAd);
+          'app_alernateAdShowBanner', appAlernateAdShowBanner);
+      sharedPreferences.setString('app_mainClickCntSwAd', appMainClickCntSwAd);
       sharedPreferences.setString(
-          'app_innerClickCntSwAd', app_innerClickCntSwAd);
+          'app_innerClickCntSwAd', appInnerClickCntSwAd);
 
       //Admob ads placement data set in the Shared Preference
       sharedPreferences.setString('ad_showAdStatus', Admob_Ads_show_status);

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:connectivity/connectivity.dart';
 
 class InternetConnection {

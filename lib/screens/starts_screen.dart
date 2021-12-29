@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import '../flutter_Adsdk/services/share_preferences_data_getter.dart';
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
+
+  @override
+  State<StartScreen> createState() => _StartScreenState();
+}
+
+class _StartScreenState extends State<StartScreen> {
+  var status;
+  @override
+  void didChangeDependencies() async {
+    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+    status = await sp.getStatus();
+    print("Status : $status");
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +32,10 @@ class StartScreen extends StatelessWidget {
       child: Center(
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed('/homeScreen');
+            print("on tap method");
+            status == true
+                ? Navigator.of(context).pushNamed('/homeScreen')
+                : Container();
           },
           child: Container(
             // margin:
