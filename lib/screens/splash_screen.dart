@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/network_helper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../flutter_Adsdk/services/share_preferences_data_getter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -12,19 +12,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool? Status;
+  var status;
 
   Future getApiData() async {
     NetworkHelper networkHelper =
         NetworkHelper('https://adzzapps.com/AppsManager/api/v1/get_app.php');
     var apiData = await networkHelper.getApiData(
-      packageName: 'com.example.fff',
+      packageName: 'com.healthyfood.bestdietplan',
       hashKey: '4nZYf4oVH16zBTF7ZWElrsrcpvU=',
       appOpenID: '26894',
       appModel: 'TRSOFTAG12789I',
     );
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Status = sharedPreferences.getBool('STATUS');
+    print(apiData);
+    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+    status = sp.getAppName();
+
+    print("splashScreen :- $status");
 
     return apiData;
   }
@@ -32,11 +35,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     getApiData();
-    super.initState();
+
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const StartScreen())));
+    super.initState();
   }
 
   @override

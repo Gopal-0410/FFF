@@ -46,6 +46,9 @@ class _MyApp extends State<MyApp> {
   void didChangeDependencies() async {
     SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = await sp.getStatus();
+    var name = await sp.getAppName();
+    print("main screen : $status");
+    print("main screen : $name");
     // var adShowStatus = await sp.getAppAdShowStatusk();
     // print("adShowStatus : $adShowStatus");
     // adShowStatus == "1" ? print("show ads") : print("do not show ads");

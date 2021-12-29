@@ -21,6 +21,7 @@ class NetworkHelper {
     });
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+      print(data);
 
       var status = data['STATUS'];
       var appName = data['APP_SETTINGS']['app_name'];
@@ -158,7 +159,7 @@ class NetworkHelper {
       sharedPreferences.setString('Fb_Banner1', fbBanner1);
       sharedPreferences.setString('Fb_Interstitial1', fbInterstitial1);
       sharedPreferences.setString('Fb_Native1', fbNative1);
-      sharedPreferences.setBool('Fb_RewardedVideo1', fbRewardedVideo1);
+      sharedPreferences.setString('Fb_RewardedVideo1', fbRewardedVideo1);
       sharedPreferences.setString('Fb_NativeBanner1', fbNativeBanner1);
 
       return data;
