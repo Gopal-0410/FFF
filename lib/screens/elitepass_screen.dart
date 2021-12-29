@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/category_widget.dart';
 import '../widgets/end_widget.dart';
 import '../data/dummy_data.dart';
 

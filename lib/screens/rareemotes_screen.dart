@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
-import '../widgets/category_widget.dart';
 import '../widgets/end_widget.dart';
 
 class RareEmotesScreen extends StatelessWidget {

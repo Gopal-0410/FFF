@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:connectivity/connectivity.dart';
 import 'package:fff/screens/elitepass_screen.dart';
 import 'package:fff/screens/events_screen.dart';
 import 'package:fff/screens/faded_wheel.dart';
@@ -16,13 +14,11 @@ import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
 import 'screens/dialogbox.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_Adsdk/services/share_preferences_data_getter.dart';
-
 import 'screens/end_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -33,12 +29,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  var internet_status;
+  var internetStatus;
   var status;
 
   Future getinternetstate() async {
     InternetConnection internetConnection = InternetConnection();
-    internet_status = await internetConnection.internetConnection();
+    internetStatus = await internetConnection.internetConnection();
   }
 
   @override
@@ -50,6 +46,9 @@ class _MyApp extends State<MyApp> {
   void didChangeDependencies() async {
     SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = await sp.getStatus();
+    // var adShowStatus = await sp.getAppAdShowStatusk();
+    // print("adShowStatus : $adShowStatus");
+    // adShowStatus == "1" ? print("show ads") : print("do not show ads");
     super.didChangeDependencies();
   }
 
@@ -71,10 +70,10 @@ class _MyApp extends State<MyApp> {
                 primarySwatch: Colors.blueGrey,
               ),
               routes: <String, WidgetBuilder>{
-                '/homeScreen': (BuildContext context) => HomeScreen(),
+                '/homeScreen': (BuildContext context) => const HomeScreen(),
                 '/Trending': (BuildContext context) => const TrendingScreen(),
-                '/Pro Dress': (BuildContext context) => ProDressScreen(),
-                '/Gun Skins': (BuildContext context) => GunScreen(),
+                '/Pro Dress': (BuildContext context) => const ProDressScreen(),
+                '/Gun Skins': (BuildContext context) => const GunScreen(),
                 '/Rare Emotes': (BuildContext context) =>
                     const RareEmotesScreen(),
                 '/Refer': (BuildContext context) => const ReferScreen(),
@@ -82,7 +81,7 @@ class _MyApp extends State<MyApp> {
                     const ElitePassScreen(),
                 '/How To Use?': (BuildContext context) =>
                     const HowToUseScreen(),
-                '/Incubator': (BuildContext context) => IncubatorScreen(),
+                '/Incubator': (BuildContext context) => const IncubatorScreen(),
                 '/Faded Wheel': (BuildContext context) =>
                     const FadedWheelScreen(),
                 '/Events': (BuildContext context) => const EventsScreen(),
@@ -90,18 +89,16 @@ class _MyApp extends State<MyApp> {
                 '/Start': (BuildContext context) => const StartScreen(),
                 DialogBox.routName: (BuildContext context) => const DialogBox(),
               },
-              home: internet_status == true
-                  ? SplashScreen()
+              home: internetStatus == true
+                  ? const SplashScreen()
                   : Center(
-                      child: Container(
-                        child: ElevatedButton(
-                          child: Text('No Internet Press!'),
-                          onPressed: () {
-                            setState(
-                              () {},
-                            );
-                          },
-                        ),
+                      child: ElevatedButton(
+                        child: const Text('No Internet Press!'),
+                        onPressed: () {
+                          setState(
+                            () {},
+                          );
+                        },
                       ),
                     ),
             );

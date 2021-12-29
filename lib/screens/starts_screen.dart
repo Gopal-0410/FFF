@@ -14,7 +14,7 @@ class _StartScreenState extends State<StartScreen> {
   void didChangeDependencies() async {
     SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = await sp.getStatus();
-    print("Status : $status");
+
     super.didChangeDependencies();
   }
 
@@ -32,7 +32,6 @@ class _StartScreenState extends State<StartScreen> {
       child: Center(
         child: GestureDetector(
           onTap: () {
-            print("on tap method");
             status == true
                 ? Navigator.of(context).pushNamed('/homeScreen')
                 : Container();

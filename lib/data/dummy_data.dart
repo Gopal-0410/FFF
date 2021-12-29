@@ -1,6 +1,8 @@
+// ignore_for_file: constant_identifier_names
+
 import '../model/categorymain.dart';
 
-// ignore: unnecessary_const, constant_identifier_names
+// ignore: unnecessary_const,
 const dummy_data = [
   CategoryMain(id: '1', name: 'Trending', url: 'assets/images/home/tre.png'),
   CategoryMain(id: '2', name: 'Pro Dress', url: 'assets/images/home/pro.png'),

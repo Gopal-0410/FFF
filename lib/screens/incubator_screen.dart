@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/category_widget.dart';
 import '../data/dummy_data.dart';
 import '../widgets/end_widget.dart';
 
 class IncubatorScreen extends StatelessWidget {
-  IncubatorScreen({Key? key}) : super(key: key);
+  const IncubatorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

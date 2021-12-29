@@ -5,14 +5,14 @@ import '../flutter_Adsdk/services/network_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var Status;
+  bool? Status;
 
   Future getApiData() async {
     NetworkHelper networkHelper =

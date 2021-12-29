@@ -5,7 +5,7 @@ import '../data/dummy_data.dart';
 import '../widgets/end_widget.dart';
 
 class GunScreen extends StatelessWidget {
-  GunScreen({Key? key}) : super(key: key);
+  const GunScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +21,20 @@ class GunScreen extends StatelessWidget {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage('assets/images/bgimage.png'))),
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Flexible(
                 child: GridView(
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 200,
                     childAspectRatio: 0.9,
                     crossAxisSpacing: 10,

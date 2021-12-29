@@ -31,7 +31,8 @@ class NetworkHelper {
       var appStatus = data['APP_SETTINGS']['app_status'];
       var appPrivacyPolicyLink = data['APP_SETTINGS']['app_privacyPolicyLink'];
       var appNeedInternet = data['APP_SETTINGS']['app_needInternet'];
-      var appUpdateAppDialogStatus = data['APP_SETTINGS']['app_updateAppDialogStatus'];
+      var appUpdateAppDialogStatus =
+          data['APP_SETTINGS']['app_updateAppDialogStatus'];
       var appVersionCode = data['APP_SETTINGS']['app_versionCode'];
       var appRedirectOtherAppStatus =
           data['APP_SETTINGS']['app_redirectOtherAppStatus'];
@@ -66,24 +67,30 @@ class NetworkHelper {
       //Getting Placements Data From Api
 
       // --------- >>>>>> Admob Placement Data
-      var Admob_Ads_show_status = data['PLACEMENT']['Admob']['ad_showAdStatus'];
-      var Admob_ad_loadAdIdsType = data['PLACEMENT']['Admob']['ad_loadAdIdsType'];
-      var Admob_AppID = data['PLACEMENT']['Admob']['AppID'];
-      var Admob_Banner1 = data['PLACEMENT']['Admob']['Banner1'];
-      var Admob_Interstitial1 = data['PLACEMENT']['Admob']['Interstitial1'];
-      var Admob_Native1 = data['PLACEMENT']['Admob']['Native1'];
-      var Admob_RewardedVideo1 = data['PLACEMENT']['Admob']['RewardedVideo1'];
-      var Admob_RewardedInterstitial1 = data['PLACEMENT']['Admob']['RewardedInterstitial1'];
-      var Admob_AppOpen1 = data['PLACEMENT']['Admob']['AppOpen1'];
+      var admobAdsShowStatus = data['PLACEMENT']['Admob']['ad_showAdStatus'];
+      var admobAdLoadAdIdsType = data['PLACEMENT']['Admob']['ad_loadAdIdsType'];
+      var admobAppID = data['PLACEMENT']['Admob']['AppID'];
+      var admobBanner1 = data['PLACEMENT']['Admob']['Banner1'];
+      var admobInterstitial1 = data['PLACEMENT']['Admob']['Interstitial1'];
+      var admobNative1 = data['PLACEMENT']['Admob']['Native1'];
+      var admobRewardedVideo1 = data['PLACEMENT']['Admob']['RewardedVideo1'];
+      var admobRewardedInterstitial1 =
+          data['PLACEMENT']['Admob']['RewardedInterstitial1'];
+      var admobAppOpen1 = data['PLACEMENT']['Admob']['AppOpen1'];
 
       // --------- >>>>>>> fb Placement Data
-      var fb_Ads_show_status = data['PLACEMENT']['Facebookaudiencenetwork']['ad_showAdStatus'];
-      var fb_ad_loadAdIdsType = data['PLACEMENT']['Facebookaudiencenetwork']['ad_loadAdIdsType'];
-      var fb_Banner1 = data['PLACEMENT']['Facebookaudiencenetwork']['Banner1'];
-      var fb_Interstitial1 = data['PLACEMENT']['Facebookaudiencenetwork']['Interstitial1'];
-      var fb_Native1 = data['PLACEMENT']['Facebookaudiencenetwork']['Native1'];
-      var fb_RewardedVideo1 = data['PLACEMENT']['Facebookaudiencenetwork']['RewardedVideo1'];
-      var fb_NativeBanner1 = data['PLACEMENT']['Facebookaudiencenetwork']['NativeBanner1'];
+      var fbAdsShowStatus =
+          data['PLACEMENT']['Facebookaudiencenetwork']['ad_showAdStatus'];
+      var fbAdLoadAdIdsType =
+          data['PLACEMENT']['Facebookaudiencenetwork']['ad_loadAdIdsType'];
+      var fbBanner1 = data['PLACEMENT']['Facebookaudiencenetwork']['Banner1'];
+      var fbInterstitial1 =
+          data['PLACEMENT']['Facebookaudiencenetwork']['Interstitial1'];
+      var fbNative1 = data['PLACEMENT']['Facebookaudiencenetwork']['Native1'];
+      var fbRewardedVideo1 =
+          data['PLACEMENT']['Facebookaudiencenetwork']['RewardedVideo1'];
+      var fbNativeBanner1 =
+          data['PLACEMENT']['Facebookaudiencenetwork']['NativeBanner1'];
 
       // App setting data set in the Shared Preference
       final SharedPreferences sharedPreferences =
@@ -133,28 +140,28 @@ class NetworkHelper {
           'app_innerClickCntSwAd', appInnerClickCntSwAd);
 
       //Admob ads placement data set in the Shared Preference
-      sharedPreferences.setString('ad_showAdStatus', Admob_Ads_show_status);
-      sharedPreferences.setString('ad_loadAdIdsType', Admob_ad_loadAdIdsType);
-      sharedPreferences.setString('AppID', Admob_AppID);
-      sharedPreferences.setString('Banner1', Admob_Banner1);
-      sharedPreferences.setString('Interstitial1', Admob_Interstitial1);
-      sharedPreferences.setString('Native1', Admob_Native1);
-      sharedPreferences.setString('RewardedVideo1', Admob_RewardedVideo1);
-      sharedPreferences.setString('RewardedInterstitial1', Admob_RewardedInterstitial1);
-      sharedPreferences.setString('AppOpen1', Admob_AppOpen1);
-
+      sharedPreferences.setString('admob_ad_showAdStatus', admobAdsShowStatus);
+      sharedPreferences.setString(
+          'admob_ad_loadAdIdsType', admobAdLoadAdIdsType);
+      sharedPreferences.setString('admob_AppID', admobAppID);
+      sharedPreferences.setString('admob_Banner1', admobBanner1);
+      sharedPreferences.setString('admob_Interstitial1', admobInterstitial1);
+      sharedPreferences.setString('admob_Native1', admobNative1);
+      sharedPreferences.setString('admob_RewardedVideo1', admobRewardedVideo1);
+      sharedPreferences.setString(
+          'admob_RewardedInterstitial1', admobRewardedInterstitial1);
+      sharedPreferences.setString('admob_AppOpen1', admobAppOpen1);
 
       //Fb Ads Placement data set in the shared preference
-      sharedPreferences.setString('ad_showAdStatus', fb_Ads_show_status);
-      sharedPreferences.setString('ad_loadAdIdsType', fb_ad_loadAdIdsType);
-      sharedPreferences.setString('Banner1', fb_Banner1);
-      sharedPreferences.setString('Interstitial1', fb_Interstitial1);
-      sharedPreferences.setString('Native1', fb_Native1);
-      sharedPreferences.setBool('RewardedVideo1', fb_RewardedVideo1);
-      sharedPreferences.setString('NativeBanner1', fb_NativeBanner1);
+      sharedPreferences.setString('Fb_ad_showAdStatus', fbAdsShowStatus);
+      sharedPreferences.setString('Fb_ad_loadAdIdsType', fbAdLoadAdIdsType);
+      sharedPreferences.setString('Fb_Banner1', fbBanner1);
+      sharedPreferences.setString('Fb_Interstitial1', fbInterstitial1);
+      sharedPreferences.setString('Fb_Native1', fbNative1);
+      sharedPreferences.setBool('Fb_RewardedVideo1', fbRewardedVideo1);
+      sharedPreferences.setString('Fb_NativeBanner1', fbNativeBanner1);
 
       return data;
-
     } else {
       throw Exception('Failed To load Api');
     }

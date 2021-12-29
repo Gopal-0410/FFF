@@ -210,4 +210,116 @@ class SharePreferencesDataGetter {
     status = sharedPreferences.getString('app_innerClickCntSwAd');
     return Future.value(status);
   }
+
+  Future getAdmobAdShowAdStatus() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('admob_ad_showAdStatus');
+    return Future.value(status);
+  }
+
+  Future getAdmobAdloadAdIdsType() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('ad_loadAdIdsType');
+    return Future.value(status);
+  }
+
+  Future getAdmobAppID() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('AppID');
+    return Future.value(status);
+  }
+
+  Future getAdmobBanner1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Banner1');
+    return Future.value(status);
+  }
+
+  Future getAdmobInterstitial1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('admob_Interstitial1');
+    return Future.value(status);
+  }
+
+  Future getAdmobNative1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('admob_Native1');
+    return Future.value(status);
+  }
+
+  Future getAdmobRewardedVideo1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('admob_RewardedVideo1');
+    return Future.value(status);
+  }
+
+  Future getAdmobRewardedInterstitial1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('admob_RewardedInterstitial1');
+    return Future.value(status);
+  }
+
+  Future getAdmobAppOpen1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('admob_AppOpen1');
+    return Future.value(status);
+  }
+
+  Future getFbAdShowAdStatus() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_ad_showAdStatus');
+    return Future.value(status);
+  }
+
+  Future getFbAdLoadAdIdsType() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_ad_loadAdIdsType');
+    return Future.value(status);
+  }
+
+  Future getFbBanner1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_Banner1');
+    return Future.value(status);
+  }
+
+  Future getFbInterstitial1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_Interstitial1');
+    return Future.value(status);
+  }
+
+  Future getFbNative1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_ad_showAdStatus');
+    return Future.value(status);
+  }
+
+  Future getFbRewardedVideo1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_RewardedVideo1');
+    return Future.value(status);
+  }
+
+  Future getFbNativeBanner1() async {
+    String? status;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    status = sharedPreferences.getString('Fb_NativeBanner1');
+    return Future.value(status);
+  }
 }

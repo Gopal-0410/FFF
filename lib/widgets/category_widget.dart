@@ -4,7 +4,7 @@ class CategoryWidget extends StatelessWidget {
   final String name;
   final String url;
   // ignore: use_key_in_widget_constructors
-  CategoryWidget({required this.name, required this.url});
+  const CategoryWidget({required this.name, required this.url});
 
   @override
   Widget build(BuildContext context) {
