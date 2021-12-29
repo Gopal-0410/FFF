@@ -27,6 +27,7 @@ void main() {
 Future getinternetstate() async{
   InternetConnection internetConnection = InternetConnection();
   internet_status = await internetConnection.internetConnection();
+  print(internet_status);
 }
 
 class MyApp extends StatefulWidget {
@@ -41,38 +42,47 @@ class _MyApp extends State<MyApp> {
   @override
   void initState() {
     // TODO: implement initState
-    getinternetstate();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FFF SKINS',
-      theme: ThemeData(
-        fontFamily: 'Muli', primaryColor: Colors.blueGrey,
-        primarySwatch: Colors.blueGrey,
-        //    canvasColor: Colors.purple.shade100,
-        // accentColor: Colors.purple.shade300
-      ),
-      routes: <String, WidgetBuilder>{
-        // ignore: unnecessary_new
-        '/homeScreen': (BuildContext context) => HomeScreen(),
-        '/Trending': (BuildContext context) => const TrendingScreen(),
-        '/Pro Dress': (BuildContext context) => ProDressScreen(),
-        '/Gun Skins': (BuildContext context) => GunScreen(),
-        '/Rare Emotes': (BuildContext context) => RareEmotesScreen(),
-        '/Refer': (BuildContext context) => ReferScreen(),
-        '/Elite Pass': (BuildContext context) => ElitePassScreen(),
-        '/How To Use?': (BuildContext context) => HowToUseScreen(),
-        '/Incubator': (BuildContext context) => IncubatorScreen(),
-        '/Faded Wheel': (BuildContext context) => FadedWheelScreen(),
-        '/Events': (BuildContext context) => EventsScreen(),
-        '/END': (BuildContext context) => EndScreen(),
-        '/Start': (BuildContext context) => StartScreen(),
-      },
-      home: internet_status == true ? SplashScreen() : Container(child: Text('No Internet'),)
-    );
+    return FutureBuilder(future: getinternetstate(),builder: (context, snapshot){
+      if (snapshot.connectionState == ConnectionState.waiting){
+        return Container();
+      }
+      else if (snapshot.hasError){
+        return Container();
+      }
+      else{
+        return MaterialApp(
+            title: 'FFF SKINS',
+            theme: ThemeData(
+              fontFamily: 'Muli', primaryColor: Colors.blueGrey,
+              primarySwatch: Colors.blueGrey,
+              //    canvasColor: Colors.purple.shade100,
+              // accentColor: Colors.purple.shade300
+            ),
+            routes: <String, WidgetBuilder>{
+              // ignore: unnecessary_new
+              '/homeScreen': (BuildContext context) => HomeScreen(),
+              '/Trending': (BuildContext context) => const TrendingScreen(),
+              '/Pro Dress': (BuildContext context) => ProDressScreen(),
+              '/Gun Skins': (BuildContext context) => GunScreen(),
+              '/Rare Emotes': (BuildContext context) => RareEmotesScreen(),
+              '/Refer': (BuildContext context) => ReferScreen(),
+              '/Elite Pass': (BuildContext context) => ElitePassScreen(),
+              '/How To Use?': (BuildContext context) => HowToUseScreen(),
+              '/Incubator': (BuildContext context) => IncubatorScreen(),
+              '/Faded Wheel': (BuildContext context) => FadedWheelScreen(),
+              '/Events': (BuildContext context) => EventsScreen(),
+              '/END': (BuildContext context) => EndScreen(),
+              '/Start': (BuildContext context) => StartScreen(),
+            },
+            home: internet_status == true ? SplashScreen() : Container(child: Text('No Internet'),)
+        );
+      }
+    });
   }
 }
 
