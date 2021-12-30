@@ -1,4 +1,6 @@
-import 'package:fff/flutter_Adsdk/services/ad_display_helper.dart';
+import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
+
+import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -12,9 +14,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
-    AdDisplayHelper().adDisposMethod();
+    BannerAdDisplayHelper().bottomAdDisposMethod();
+    BannerAdDisplayHelper().mediumRectangleBannerAd();
   }
 
   @override
@@ -37,7 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      bottomNavigationBar: AdDisplayHelper().isadloaded() ? Container(height: AdDisplayHelper().banneradheight(),width: AdDisplayHelper().banneradwidth(),child: AdWidget(ad: AdDisplayHelper().bannerad(),),) : null,
+      bottomNavigationBar: BannerAdDisplayHelper().isBottomadAdloaded()
+          ? SizedBox(
+              height: BannerAdDisplayHelper().bottomBanneradHeight(),
+              width: BannerAdDisplayHelper().bottomBanneradWidth(),
+              child: AdWidget(
+                ad: BannerAdDisplayHelper().bottomBannerAd(),
+              ),
+            )
+          : null,
       drawer: Drawer(
         // elevation: 5,
         child: ListView(
@@ -174,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
+        // width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -187,22 +203,25 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.10,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage('assets/images/home/banner.png'),
-                  ),
-                ),
+                child: BannerAdDisplayHelper().isMediumRectangleBannerAdloaded()
+                    ? SizedBox(
+                        height: BannerAdDisplayHelper()
+                            .mediumRectangleBannerHeight(),
+                        width: BannerAdDisplayHelper()
+                            .mediumRectangleBannerWidth(),
+                        child: AdWidget(
+                            ad: BannerAdDisplayHelper()
+                                .mediumRectangleBannerAd()),
+                      )
+                    : null,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+              Container(
+                //padding: const EdgeInsets.only(top: 16.0),
                 //  child: Flexible(
                 child: SizedBox(
                   height: (MediaQuery.of(context).size.height -
                           AppBar().preferredSize.height) *
-                      0.758,
+                      0.49,
                   child: ListView.builder(
                     itemCount: name.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -222,7 +241,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             child: GestureDetector(
                               onTap: () async {
+                                InterstitialAdDisplayHelper()
+                                    .showInterstitialAd();
                                 var val = name[index];
+
                                 await Navigator.of(context)
                                     .pushNamed('/$val', arguments: name[index]);
                               },

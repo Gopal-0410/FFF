@@ -235,10 +235,10 @@ class SharePreferencesDataGetter {
     return Future.value(status);
   }
 
-  Future getAdmobBanner1() async {
+  Future<String> getAdmobBanner1() async {
     String? status;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    status = sharedPreferences.getString('Banner1');
+    status = sharedPreferences.getString('admob_Banner1');
     return Future.value(status);
   }
 

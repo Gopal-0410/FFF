@@ -1,4 +1,7 @@
-import 'package:fff/flutter_Adsdk/services/ad_display_helper.dart';
+// ignore_for_file: prefer_typing_uninitialized_variables, avoid_print
+import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
+
+import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
 import 'package:fff/screens/elitepass_screen.dart';
 import 'package:fff/screens/events_screen.dart';
 import 'package:fff/screens/faded_wheel.dart';
@@ -39,11 +42,14 @@ class _MyApp extends State<MyApp> {
   Future getinternetstate() async {
     InternetConnection internetConnection = InternetConnection();
     internetStatus = await internetConnection.internetConnection();
+    print("Main:- $internetStatus ");
   }
 
   @override
   void initState() {
-    AdDisplayHelper().createBottomBannerAd();
+    BannerAdDisplayHelper().createBottomBannerAd();
+    BannerAdDisplayHelper().createMediumRectangleBannerAd();
+    InterstitialAdDisplayHelper().createInterstitialAd();
     super.initState();
   }
 
@@ -54,7 +60,7 @@ class _MyApp extends State<MyApp> {
     var name = await sp.getAppName();
     print("main screen : $status");
     print("main screen : $name");
-    // var adShowStatus = await sp.getAppAdShowStatusk();
+    // var adShowStatus = await sp.getAdmobAdShowAdStatus();
     // print("adShowStatus : $adShowStatus");
     // adShowStatus == "1" ? print("show ads") : print("do not show ads");
     super.didChangeDependencies();
@@ -63,54 +69,53 @@ class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: getinternetstate(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Container();
-          } else if (snapshot.hasError) {
-            return Container();
-          } else {
-            return MaterialApp(
-              title: 'FFF SKINS',
-              theme: ThemeData(
-                fontFamily: 'Muli',
-                primaryColor: Colors.blueGrey,
-                primarySwatch: Colors.blueGrey,
-              ),
-              routes: <String, WidgetBuilder>{
-                '/homeScreen': (BuildContext context) => const HomeScreen(),
-                '/Trending': (BuildContext context) => const TrendingScreen(),
-                '/Pro Dress': (BuildContext context) => const ProDressScreen(),
-                '/Gun Skins': (BuildContext context) => const GunScreen(),
-                '/Rare Emotes': (BuildContext context) =>
-                    const RareEmotesScreen(),
-                '/Refer': (BuildContext context) => const ReferScreen(),
-                '/Elite Pass': (BuildContext context) =>
-                    const ElitePassScreen(),
-                '/How To Use?': (BuildContext context) =>
-                    const HowToUseScreen(),
-                '/Incubator': (BuildContext context) => const IncubatorScreen(),
-                '/Faded Wheel': (BuildContext context) =>
-                    const FadedWheelScreen(),
-                '/Events': (BuildContext context) => const EventsScreen(),
-                '/END': (BuildContext context) => const EndScreen(),
-                '/Start': (BuildContext context) => const StartScreen(),
-                DialogBox.routName: (BuildContext context) => const DialogBox(),
-              },
-              home: internetStatus == true
-                  ? const SplashScreen()
-                  : Center(
-                      child: ElevatedButton(
-                        child: const Text('No Internet Press!'),
-                        onPressed: () {
-                          setState(
-                            () {},
-                          );
-                        },
-                      ),
+      future: getinternetstate(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container();
+        } else if (snapshot.hasError) {
+          return Container();
+        } else {
+          return MaterialApp(
+            title: 'FFF SKINS',
+            theme: ThemeData(
+              fontFamily: 'Muli',
+              primaryColor: Colors.blueGrey,
+              primarySwatch: Colors.blueGrey,
+            ),
+            routes: <String, WidgetBuilder>{
+              '/homeScreen': (BuildContext context) => const HomeScreen(),
+              '/Trending': (BuildContext context) => const TrendingScreen(),
+              '/Pro Dress': (BuildContext context) => const ProDressScreen(),
+              '/Gun Skins': (BuildContext context) => const GunScreen(),
+              '/Rare Emotes': (BuildContext context) =>
+                  const RareEmotesScreen(),
+              '/Refer': (BuildContext context) => const ReferScreen(),
+              '/Elite Pass': (BuildContext context) => const ElitePassScreen(),
+              '/How To Use?': (BuildContext context) => const HowToUseScreen(),
+              '/Incubator': (BuildContext context) => const IncubatorScreen(),
+              '/Faded Wheel': (BuildContext context) =>
+                  const FadedWheelScreen(),
+              '/Events': (BuildContext context) => const EventsScreen(),
+              '/END': (BuildContext context) => const EndScreen(),
+              '/Start': (BuildContext context) => const StartScreen(),
+              DialogBox.routName: (BuildContext context) => const DialogBox(),
+            },
+            home: internetStatus == true
+                ? const SplashScreen()
+                : Center(
+                    child: ElevatedButton(
+                      child: const Text('No Internet Press!'),
+                      onPressed: () {
+                        setState(
+                          () {},
+                        );
+                      },
                     ),
-            );
-          }
-        });
+                  ),
+          );
+        }
+      },
+    );
   }
 }
