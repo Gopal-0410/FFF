@@ -1,7 +1,5 @@
 import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
-
 import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -45,15 +43,17 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      // bottomNavigationBar: BannerAdDisplayHelper().isBottomadAdloaded()
-      //     ? SizedBox(
-      //         height: BannerAdDisplayHelper().bottomBanneradHeight(),
-      //         width: BannerAdDisplayHelper().bottomBanneradWidth(),
-      //         child: AdWidget(
-      //           ad: BannerAdDisplayHelper().bottomBannerAd(),
-      //         ),
-      //       )
-      //     : Container(),
+      bottomNavigationBar: BannerAdDisplayHelper().isBottomadAdloaded()
+          ? SizedBox(
+              height: BannerAdDisplayHelper().bottomBanneradHeight(),
+              width: BannerAdDisplayHelper().bottomBanneradWidth(),
+              child: AdWidget(
+                ad: BannerAdDisplayHelper().bottomBannerAd(),
+              ),
+            )
+          : Container(
+              //here we will put custom ads
+              ),
       drawer: Drawer(
         // elevation: 5,
         child: ListView(
@@ -190,7 +190,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
-        // width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -216,8 +215,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     : null,
               ),
               Container(
-                //padding: const EdgeInsets.only(top: 16.0),
-                //  child: Flexible(
                 child: SizedBox(
                   height: (MediaQuery.of(context).size.height -
                           AppBar().preferredSize.height) *
@@ -231,14 +228,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: const EdgeInsets.only(top: 10),
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: Container(
-                            // shadowColor: Colors.red,
                             decoration: ShapeDecoration(
-                              //s color: const Color.fromARGB(255, 23, 23, 23),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
                             ),
-
                             child: GestureDetector(
                               onTap: () async {
                                 InterstitialAdDisplayHelper()
