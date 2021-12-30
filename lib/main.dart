@@ -38,6 +38,7 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   var internetStatus;
   var status;
+  InterstitialAdDisplayHelper interAd = InterstitialAdDisplayHelper();
 
   Future getinternetstate() async {
     InternetConnection internetConnection = InternetConnection();
@@ -49,20 +50,23 @@ class _MyApp extends State<MyApp> {
   void initState() {
     BannerAdDisplayHelper().createBottomBannerAd();
     BannerAdDisplayHelper().createMediumRectangleBannerAd();
-    InterstitialAdDisplayHelper().createInterstitialAd();
+
     super.initState();
   }
 
   @override
   void didChangeDependencies() async {
+    interAd.createInterstitialAd();
     SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = await sp.getStatus();
-    var name = await sp.getAppName();
-    print("main screen : $status");
-    print("main screen : $name");
-    // var adShowStatus = await sp.getAdmobAdShowAdStatus();
-    // print("adShowStatus : $adShowStatus");
-    // adShowStatus == "1" ? print("show ads") : print("do not show ads");
+    // var name = await sp.getAppName();
+    // var id = await sp.getAdmobInterstitial1();
+    // print("mainScreen : ++++++++++++++++++++++++++++++++++++++++++++++: $id");
+    // print("main screen : $status");
+    // print("main screen : $name");
+    // // var adShowStatus = await sp.getAdmobAdShowAdStatus();
+    // // print("adShowStatus : $adShowStatus");
+    // // adShowStatus == "1" ? print("show ads") : print("do not show ads");
     super.didChangeDependencies();
   }
 

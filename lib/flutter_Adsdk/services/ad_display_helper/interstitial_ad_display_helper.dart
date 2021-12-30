@@ -2,14 +2,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
 const int maxFailedLoadAttempts = 10;
+InterstitialAd? interstitialAd;
+int interstitialLoadAttempts = 0;
+bool isInterstitialAdReady = false;
 
 class InterstitialAdDisplayHelper {
-  InterstitialAd? interstitialAd;
-  int interstitialLoadAttempts = 0;
-  bool isInterstitialAdReady = false;
-  // dynamic nextScreen;
-  // InterstitialAdDisplayHelper(this.nextScreen);
-
   void createInterstitialAd() async {
     InterstitialAd.load(
       adUnitId: await AdHelper.admobInterstitialAdUnitId1,

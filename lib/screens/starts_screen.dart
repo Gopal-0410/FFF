@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/share_preferences_data_getter.dart';
 
@@ -32,6 +33,7 @@ class _StartScreenState extends State<StartScreen> {
       child: Center(
         child: GestureDetector(
           onTap: () {
+            InterstitialAdDisplayHelper().showInterstitialAd();
             status == true
                 ? Navigator.of(context).pushNamed('/homeScreen')
                 : Container();
