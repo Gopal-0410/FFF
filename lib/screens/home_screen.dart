@@ -1,5 +1,7 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,6 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void dispose() {
+    super.dispose();
+    AdDisplayHelper().adDisposMethod();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> image = [
@@ -29,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
+      bottomNavigationBar: AdDisplayHelper().isadloaded() ? Container(height: AdDisplayHelper().banneradheight(),width: AdDisplayHelper().banneradwidth(),child: AdWidget(ad: AdDisplayHelper().bannerad(),),) : null,
       drawer: Drawer(
         // elevation: 5,
         child: ListView(
@@ -179,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.15,
+                height: MediaQuery.of(context).size.height * 0.10,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,

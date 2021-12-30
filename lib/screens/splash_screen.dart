@@ -23,19 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
       appOpenID: '26894',
       appModel: 'TRSOFTAG12789I',
     );
-    print(apiData);
     SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = sp.getAppName();
-
-    print("splashScreen :- $status");
-
     return apiData;
   }
 
   @override
   void initState() {
     getApiData();
-
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
