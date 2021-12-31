@@ -95,7 +95,7 @@ class SharePreferencesDataGetter {
     return Future.value(status);
   }
 
-  Future getAppAdShowStatusk() async {
+  Future getAppAdShowStatus() async {
     String? status;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     status = sharedPreferences.getString('app_adShowStatus');

@@ -38,19 +38,16 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   var internetStatus;
   var status;
+  var ad_show_status;
   InterstitialAdDisplayHelper interAd = InterstitialAdDisplayHelper();
 
   Future getinternetstate() async {
     InternetConnection internetConnection = InternetConnection();
     internetStatus = await internetConnection.internetConnection();
-    print("Main:- $internetStatus ");
   }
 
   @override
   void initState() {
-    BannerAdDisplayHelper().createBottomBannerAd();
-    BannerAdDisplayHelper().createMediumRectangleBannerAd();
-
     super.initState();
   }
 
@@ -59,6 +56,11 @@ class _MyApp extends State<MyApp> {
     interAd.createInterstitialAd();
     SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = await sp.getStatus();
+    ad_show_status = await sp.getAppAdShowStatus();
+    if (ad_show_status == '1'){
+      BannerAdDisplayHelper().createBottomBannerAd();
+      BannerAdDisplayHelper().createMediumRectangleBannerAd();
+    }
     // var name = await sp.getAppName();
     // var id = await sp.getAdmobInterstitial1();
     // print("mainScreen : ++++++++++++++++++++++++++++++++++++++++++++++: $id");
