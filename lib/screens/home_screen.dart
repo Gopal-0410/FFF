@@ -43,17 +43,17 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      bottomNavigationBar: BannerAdDisplayHelper().isBottomadAdloaded()
-          ? SizedBox(
-              height: BannerAdDisplayHelper().bottomBanneradHeight(),
-              width: BannerAdDisplayHelper().bottomBanneradWidth(),
-              child: AdWidget(
-                ad: BannerAdDisplayHelper().bottomBannerAd(),
-              ),
-            )
-          : Container(
-              //here we will put custom ads
-              ),
+      // bottomNavigationBar: BannerAdDisplayHelper().isBottomadAdloaded()
+      //     ? SizedBox(
+      //         height: BannerAdDisplayHelper().bottomBanneradHeight(),
+      //         width: BannerAdDisplayHelper().bottomBanneradWidth(),
+      //         child: AdWidget(
+      //           ad: BannerAdDisplayHelper().bottomBannerAd(),
+      //         ),
+      //       )
+      //     : Container(
+      //         //here we will put custom ads
+      //         ),
       drawer: Drawer(
         // elevation: 5,
         child: ListView(

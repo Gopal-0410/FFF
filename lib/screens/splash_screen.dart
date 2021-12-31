@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/network_helper.dart';
@@ -14,11 +16,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   var status;
 
+  var ad_show_status;
+
   Future getApiData() async {
     NetworkHelper networkHelper =
         NetworkHelper('https://adzzapps.com/AppsManager/api/v1/get_app.php');
     var apiData = await networkHelper.getApiData(
-      packageName: 'com.healthyfood.bestdietplan',
+      packageName: 'com.example.fff',
       hashKey: '4nZYf4oVH16zBTF7ZWElrsrcpvU=',
       appOpenID: '26894',
       appModel: 'TRSOFTAG12789I',
@@ -36,6 +40,20 @@ class _SplashScreenState extends State<SplashScreen> {
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const StartScreen())));
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+    status = await sp.getStatus();
+    ad_show_status = await sp.getAppAdShowStatus();
+    if (ad_show_status == '1') {
+      BannerAdDisplayHelper().createBottomBannerAd();
+      BannerAdDisplayHelper().createMediumRectangleBannerAd();
+      InterstitialAdDisplayHelper().createInterstitialAd();
+    }
+
+    super.didChangeDependencies();
   }
 
   @override

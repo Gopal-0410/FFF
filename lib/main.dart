@@ -52,27 +52,6 @@ class _MyApp extends State<MyApp> {
   }
 
   @override
-  void didChangeDependencies() async {
-    interAd.createInterstitialAd();
-    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
-    status = await sp.getStatus();
-    ad_show_status = await sp.getAppAdShowStatus();
-    if (ad_show_status == '1'){
-      BannerAdDisplayHelper().createBottomBannerAd();
-      BannerAdDisplayHelper().createMediumRectangleBannerAd();
-    }
-    // var name = await sp.getAppName();
-    // var id = await sp.getAdmobInterstitial1();
-    // print("mainScreen : ++++++++++++++++++++++++++++++++++++++++++++++: $id");
-    // print("main screen : $status");
-    // print("main screen : $name");
-    // // var adShowStatus = await sp.getAdmobAdShowAdStatus();
-    // // print("adShowStatus : $adShowStatus");
-    // // adShowStatus == "1" ? print("show ads") : print("do not show ads");
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getinternetstate(),
