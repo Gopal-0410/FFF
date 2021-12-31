@@ -18,33 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   var ad_show_status;
 
-  Future getApiData() async {
-    NetworkHelper networkHelper =
-        NetworkHelper('https://adzzapps.com/AppsManager/api/v1/get_app.php');
-    var apiData = await networkHelper.getApiData(
-      packageName: 'com.example.fff',
-      hashKey: '4nZYf4oVH16zBTF7ZWElrsrcpvU=',
-      appOpenID: '26894',
-      appModel: 'TRSOFTAG12789I',
-    );
-    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
-    status = sp.getAppName();
-    return apiData;
-  }
-
   @override
-  void initState() {
-    getApiData();
+  void didChangeDependencies() async {
+    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const StartScreen())));
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() async {
-    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     status = await sp.getStatus();
     ad_show_status = await sp.getAppAdShowStatus();
     if (ad_show_status == '1') {

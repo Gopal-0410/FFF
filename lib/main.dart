@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, avoid_print
-import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 
-import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
+import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'package:fff/screens/elitepass_screen.dart';
 import 'package:fff/screens/events_screen.dart';
 import 'package:fff/screens/faded_wheel.dart';
@@ -17,8 +16,9 @@ import 'package:fff/screens/starts_screen.dart';
 import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
+import 'flutter_Adsdk/services/network_helper.dart';
 import 'screens/dialogbox.dart';
-import 'flutter_Adsdk/services/share_preferences_data_getter.dart';
+
 import 'screens/end_screen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -38,12 +38,27 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   var internetStatus;
   var status;
-  var ad_show_status;
-  InterstitialAdDisplayHelper interAd = InterstitialAdDisplayHelper();
+  bool load = false;
 
   Future getinternetstate() async {
     InternetConnection internetConnection = InternetConnection();
     internetStatus = await internetConnection.internetConnection();
+  }
+
+  Future<bool> getApiData() async {
+    NetworkHelper networkHelper =
+        NetworkHelper('https://adzzapps.com/AppsManager/api/v1/get_app.php');
+    var apiData = await networkHelper.getApiData(
+      packageName: 'com.example.fff',
+      hashKey: '4nZYf4oVH16zBTF7ZWElrsrcpvU=',
+      appOpenID: '26894',
+      appModel: 'TRSOFTAG12789I',
+    );
+    print("============================ Main Screen ======================");
+    print("Main Screeen : $apiData");
+    print(await SharePreferencesDataGetter().getAppAdShowStatus());
+
+    return apiData;
   }
 
   @override
@@ -87,7 +102,10 @@ class _MyApp extends State<MyApp> {
               DialogBox.routName: (BuildContext context) => const DialogBox(),
             },
             home: internetStatus == true
-                ? const SplashScreen()
+                ? load != getApiData()
+                    ? const SplashScreen()
+                    : const Text(
+                        "Error in the Main ===============================================================")
                 : Center(
                     child: ElevatedButton(
                       child: const Text('No Internet Press!'),

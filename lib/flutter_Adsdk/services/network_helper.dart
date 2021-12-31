@@ -7,7 +7,7 @@ class NetworkHelper {
 
   NetworkHelper(this.url);
 
-  Future getApiData({
+  Future<bool> getApiData({
     required String packageName,
     required String hashKey,
     required String appOpenID,
@@ -162,8 +162,11 @@ class NetworkHelper {
       sharedPreferences.setString('Fb_RewardedVideo1', fbRewardedVideo1);
       sharedPreferences.setString('Fb_NativeBanner1', fbNativeBanner1);
 
-      return data;
+      return Future.value(true);
     } else {
+      print("========================================");
+      print("Fail to load Api");
+
       throw Exception('Failed To load Api');
     }
   }

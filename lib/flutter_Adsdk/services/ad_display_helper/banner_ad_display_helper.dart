@@ -1,13 +1,13 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
-late BannerAd _bottomBannerAd;
+BannerAd? _bottomBannerAd;
 bool _isBannerAdLoaded = false;
-late BannerAd _mediumRectangleBannerAd;
+BannerAd? _mediumRectangleBannerAd;
 bool _isMediumRectangelBannerAdLoaded = false;
-late BannerAd _fullBannerAd;
+BannerAd? _fullBannerAd;
 bool _fullBannerAdLoaded = false;
-late BannerAd _largeBannerAd;
+BannerAd? _largeBannerAd;
 bool _largeBannerAdLoaded = false;
 
 class BannerAdDisplayHelper {
@@ -24,7 +24,7 @@ class BannerAdDisplayHelper {
         ad.dispose();
       }),
     );
-    await _bottomBannerAd.load();
+    await _bottomBannerAd!.load();
   }
 
   bool isBottomadAdloaded() {
@@ -36,19 +36,19 @@ class BannerAdDisplayHelper {
   }
 
   void bottomAdDisposMethod() {
-    _bottomBannerAd.dispose();
+    _bottomBannerAd!.dispose();
   }
 
   double bottomBanneradHeight() {
-    return _bottomBannerAd.size.height.toDouble();
+    return _bottomBannerAd!.size.height.toDouble();
   }
 
   double bottomBanneradWidth() {
-    return _bottomBannerAd.size.width.toDouble();
+    return _bottomBannerAd!.size.width.toDouble();
   }
 
   BannerAd bottomBannerAd() {
-    return _bottomBannerAd;
+    return _bottomBannerAd!;
   }
 
   //**************Medium Rectangle Banner*******************//
@@ -63,7 +63,7 @@ class BannerAdDisplayHelper {
         ad.dispose();
       }),
     );
-    await _mediumRectangleBannerAd.load();
+    await _mediumRectangleBannerAd!.load();
   }
 
   bool isMediumRectangleBannerAdloaded() {
@@ -75,19 +75,19 @@ class BannerAdDisplayHelper {
   }
 
   double mediumRectangleBannerHeight() {
-    return _mediumRectangleBannerAd.size.height.toDouble();
+    return _mediumRectangleBannerAd!.size.height.toDouble();
   }
 
   double mediumRectangleBannerWidth() {
-    return _mediumRectangleBannerAd.size.width.toDouble();
+    return _mediumRectangleBannerAd!.size.width.toDouble();
   }
 
   void mediumRectangleBannerAdDispose() {
-    _mediumRectangleBannerAd.dispose();
+    _mediumRectangleBannerAd!.dispose();
   }
 
   BannerAd mediumRectangleBannerAd() {
-    return _mediumRectangleBannerAd;
+    return _mediumRectangleBannerAd!;
   }
 
 //************** Large Banner*******************//
@@ -102,7 +102,7 @@ class BannerAdDisplayHelper {
         ad.dispose();
       }),
     );
-    await _largeBannerAd.load();
+    await _largeBannerAd!.load();
   }
 
   bool isLargeBannerAdloaded() {
@@ -114,19 +114,19 @@ class BannerAdDisplayHelper {
   }
 
   double largeBannerHeight() {
-    return _largeBannerAd.size.height.toDouble();
+    return _largeBannerAd!.size.height.toDouble();
   }
 
   double largeBannerWidth() {
-    return _largeBannerAd.size.width.toDouble();
+    return _largeBannerAd!.size.width.toDouble();
   }
 
   void largeBannerAdDispose() {
-    _largeBannerAd.dispose();
+    _largeBannerAd!.dispose();
   }
 
   BannerAd largeBannerAd() {
-    return _largeBannerAd;
+    return _largeBannerAd!;
   }
 
 //************** Full Banner*******************//
@@ -141,7 +141,7 @@ class BannerAdDisplayHelper {
         ad.dispose();
       }),
     );
-    await _fullBannerAd.load();
+    await _fullBannerAd!.load();
   }
 
   bool isFullBannerAdloaded() {
@@ -153,18 +153,18 @@ class BannerAdDisplayHelper {
   }
 
   double fullBannerHeight() {
-    return _fullBannerAd.size.height.toDouble();
+    return _fullBannerAd!.size.height.toDouble();
   }
 
   double fullBannerWidth() {
-    return _fullBannerAd.size.width.toDouble();
+    return _fullBannerAd!.size.width.toDouble();
   }
 
   void fullBannerAdDispose() {
-    _fullBannerAd.dispose();
+    _fullBannerAd!.dispose();
   }
 
   BannerAd fullBannerAd() {
-    return _fullBannerAd;
+    return _fullBannerAd!;
   }
 }

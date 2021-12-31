@@ -1,3 +1,5 @@
+import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
+
 import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +13,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var adShow;
+  bool? adLoad;
   @override
   void initState() {
     super.initState();
   }
 
   @override
+  void didChangeDependencies() async {
+    adShow = await SharePreferencesDataGetter().getAppAdShowStatus();
+    print(
+        "========================================== Home Screen =======================");
+    print(adShow);
+    adLoad = BannerAdDisplayHelper().isMediumRectangleBannerAdloaded();
+    print(adLoad);
+    super.didChangeDependencies();
+  }
+
+  // @override
+  // void didChangeDependencies() async {
+
+  // }
+
+  @override
   void dispose() {
     super.dispose();
-    BannerAdDisplayHelper().bottomAdDisposMethod();
-    BannerAdDisplayHelper().mediumRectangleBannerAd();
+    // BannerAdDisplayHelper().bottomAdDisposMethod();
+    // BannerAdDisplayHelper().mediumRectangleBannerAd();
   }
 
   @override
@@ -202,17 +222,19 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                child: BannerAdDisplayHelper().isMediumRectangleBannerAdloaded()
-                    ? SizedBox(
-                        height: BannerAdDisplayHelper()
-                            .mediumRectangleBannerHeight(),
-                        width: BannerAdDisplayHelper()
-                            .mediumRectangleBannerWidth(),
-                        child: AdWidget(
-                            ad: BannerAdDisplayHelper()
-                                .mediumRectangleBannerAd()),
-                      )
-                    : null,
+                child: adShow == '1'
+                    ? adLoad == true
+                        ? SizedBox(
+                            height: BannerAdDisplayHelper()
+                                .mediumRectangleBannerHeight(),
+                            width: BannerAdDisplayHelper()
+                                .mediumRectangleBannerWidth(),
+                            child: AdWidget(
+                                ad: BannerAdDisplayHelper()
+                                    .mediumRectangleBannerAd()),
+                          )
+                        : const Text("no ads1")
+                    : const Text("no ads 2"),
               ),
               Container(
                 child: SizedBox(
