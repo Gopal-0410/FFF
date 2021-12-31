@@ -14,7 +14,7 @@ bool _largeBannerAdLoaded = false;
 class BannerAdDisplayHelper {
   //*****
   //************** Bottom Banner*******************//
-  SharePreferencesDataGetter pref = SharePreferencesDataGetter();
+  SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
 
   void createBottomBannerAd() async {
     var adShowStatus = await pref.getAppAdShowStatus();

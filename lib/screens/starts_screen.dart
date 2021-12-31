@@ -13,7 +13,7 @@ class _StartScreenState extends State<StartScreen> {
   var status;
   @override
   void didChangeDependencies() async {
-    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+    SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();
     status = await sp.getStatus();
 
     super.didChangeDependencies();

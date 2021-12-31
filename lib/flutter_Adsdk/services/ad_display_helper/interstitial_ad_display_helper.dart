@@ -7,7 +7,7 @@ InterstitialAd? admobinterstitialAd1;
 int interstitialAd1LoadAttempts = 0;
 
 class InterstitialAdDisplayHelper {
-  SharePreferencesDataGetter pref = SharePreferencesDataGetter();
+  SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
 
   void createadmobInterstitialAdUnitId1() async {
     var adShowStatus = await pref.getAppAdShowStatus();
