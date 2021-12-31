@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
     BannerAdDisplayHelper().bottomAdDisposMethod();
     BannerAdDisplayHelper().mediumRectangleBannerAd();
-    InterstitialAdDisplayHelper().dispose();
+    InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
   }
 
   @override

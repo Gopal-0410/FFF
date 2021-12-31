@@ -1,49 +1,61 @@
+import '../share_preferences_data_getter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
 const int maxFailedLoadAttempts = 10;
-InterstitialAd? interstitialAd;
-int interstitialLoadAttempts = 0;
-bool isInterstitialAdReady = false;
+InterstitialAd? admobinterstitialAd1;
+int interstitialAd1LoadAttempts = 0;
 
 class InterstitialAdDisplayHelper {
-  void createInterstitialAd() async {
+  SharePreferencesDataGetter pref = SharePreferencesDataGetter();
+
+  void createadmobInterstitialAdUnitId1() async {
+    var adShowStatus = await pref.getAppAdShowStatus();
     InterstitialAd.load(
       adUnitId: await AdHelper.admobInterstitialAdUnitId1,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
-          interstitialAd = ad;
-          interstitialLoadAttempts = 0;
+          if (adShowStatus == '1') {
+            admobinterstitialAd1 = ad;
+            interstitialAd1LoadAttempts = 0;
+          }
         },
         onAdFailedToLoad: (LoadAdError error) {
-          interstitialLoadAttempts += 1;
-          interstitialAd = null;
-          if (interstitialLoadAttempts <= maxFailedLoadAttempts) {
-            createInterstitialAd();
+          if (adShowStatus == '1') {
+            interstitialAd1LoadAttempts += 1;
+            admobinterstitialAd1 = null;
+          }
+
+          if (interstitialAd1LoadAttempts <= maxFailedLoadAttempts) {
+            createadmobInterstitialAdUnitId1();
           }
         },
       ),
     );
   }
 
-  void showInterstitialAd() {
-    if (interstitialAd != null) {
-      interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+  void showInterstitialAd() async {
+    if (admobinterstitialAd1 != null) {
+      admobinterstitialAd1!.fullScreenContentCallback =
+          FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           ad.dispose();
-          createInterstitialAd();
+          createadmobInterstitialAdUnitId1();
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
           ad.dispose();
-          createInterstitialAd();
+          createadmobInterstitialAdUnitId1();
         },
       );
-      interstitialAd!.show();
+      var adShowStatus = await pref.getAppAdShowStatus();
+      if (adShowStatus == '1') {
+        admobinterstitialAd1!.show();
+      }
     }
   }
 
-  void dispose() {
-    interstitialAd?.dispose();
+  void admobInterstitialAdUnitId1Dispose() {
+    admobinterstitialAd1?.dispose();
   }
 }

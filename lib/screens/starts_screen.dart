@@ -33,17 +33,11 @@ class _StartScreenState extends State<StartScreen> {
       child: Center(
         child: GestureDetector(
           onTap: () async {
-            if (await SharePreferencesDataGetter().getAppAdShowStatus() ==
-                '1') {
-              InterstitialAdDisplayHelper().showInterstitialAd();
-              status == true
-                  ? Navigator.of(context).pushNamed('/homeScreen')
-                  : Container();
-            } else {
-              status == true
-                  ? Navigator.of(context).pushNamed('/homeScreen')
-                  : Container();
-            }
+            InterstitialAdDisplayHelper().showInterstitialAd();
+
+            status == true
+                ? Navigator.of(context).pushNamed('/homeScreen')
+                : Container();
           },
           child: Container(
             // margin:

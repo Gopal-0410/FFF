@@ -1,4 +1,4 @@
-import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
+import '../share_preferences_data_getter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
@@ -61,8 +61,7 @@ class BannerAdDisplayHelper {
 
   //**************Medium Rectangle Banner*******************//
   void createMediumRectangleBannerAd() async {
-    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
-    var adshow = await sp.getAppAdShowStatus();
+    var adshow = await pref.getAppAdShowStatus();
     _mediumRectangleBannerAd = BannerAd(
       adUnitId: await AdHelper.admobBannerAdUnitId,
       size: AdSize.mediumRectangle,
@@ -108,12 +107,19 @@ class BannerAdDisplayHelper {
 
 //************** Large Banner*******************//
   void createLargeBannerAd() async {
+    var adshow = await pref.getAppAdShowStatus();
     _largeBannerAd = BannerAd(
       adUnitId: await AdHelper.admobBannerAdUnitId,
       size: AdSize.largeBanner,
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
-        _largeBannerAdLoaded = true;
+        if (adshow == '1') {
+          print('here');
+          _largeBannerAdLoaded = true;
+        } else {
+          print('here failed');
+          _largeBannerAdLoaded = false;
+        }
       }, onAdFailedToLoad: (ad, error) {
         ad.dispose();
       }),
@@ -147,12 +153,19 @@ class BannerAdDisplayHelper {
 
 //************** Full Banner*******************//
   void createFullBannerAd() async {
+    var adshow = await pref.getAppAdShowStatus();
     _fullBannerAd = BannerAd(
       adUnitId: await AdHelper.admobBannerAdUnitId,
       size: AdSize.fullBanner,
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
-        _fullBannerAdLoaded = true;
+        if (adshow == '1') {
+          print('here');
+          _fullBannerAdLoaded = true;
+        } else {
+          print('here failed');
+          _fullBannerAdLoaded = false;
+        }
       }, onAdFailedToLoad: (ad, error) {
         ad.dispose();
       }),
