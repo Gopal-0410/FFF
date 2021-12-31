@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
@@ -19,7 +20,15 @@ class BannerAdDisplayHelper {
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
-        _isBannerAdLoaded = true;
+        SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+        if (sp.getAppAdShowStatus() == '1'){
+          _isBannerAdLoaded = true;
+        }
+        else
+          {
+            _isBannerAdLoaded = false;
+          }
+
       }, onAdFailedToLoad: (ad, error) {
         ad.dispose();
       }),
@@ -53,12 +62,23 @@ class BannerAdDisplayHelper {
 
   //**************Medium Rectangle Banner*******************//
   void createMediumRectangleBannerAd() async {
+    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
+    var adshow = await sp.getAppAdShowStatus();
     _mediumRectangleBannerAd = BannerAd(
       adUnitId: await AdHelper.admobBannerAdUnitId,
       size: AdSize.mediumRectangle,
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
-        _isMediumRectangelBannerAdLoaded = true;
+        if (adshow == '1'){
+          print('here');
+          _isMediumRectangelBannerAdLoaded = true;
+        }
+        else
+        {
+          print('here failed');
+          _isMediumRectangelBannerAdLoaded = false;
+        }
+
       }, onAdFailedToLoad: (ad, error) {
         ad.dispose();
       }),

@@ -56,6 +56,7 @@ class _MyApp extends State<MyApp> {
     );
     print("============================ Main Screen ======================");
     print("Main Screeen : $apiData");
+    print("---->>>>>>>>>>>>");
     print(await SharePreferencesDataGetter().getAppAdShowStatus());
 
     return apiData;

@@ -15,7 +15,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   var status;
-
   var ad_show_status;
 
   @override
@@ -28,11 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
     status = await sp.getStatus();
     ad_show_status = await sp.getAppAdShowStatus();
     if (ad_show_status == '1') {
-      BannerAdDisplayHelper().createBottomBannerAd();
-      BannerAdDisplayHelper().createMediumRectangleBannerAd();
       InterstitialAdDisplayHelper().createInterstitialAd();
     }
-
     super.didChangeDependencies();
   }
 
