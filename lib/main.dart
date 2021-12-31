@@ -18,7 +18,6 @@ import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
 import 'flutter_Adsdk/services/network_helper.dart';
 import 'screens/dialogbox.dart';
-
 import 'screens/end_screen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -54,10 +53,6 @@ class _MyApp extends State<MyApp> {
       appOpenID: '26894',
       appModel: 'TRSOFTAG12789I',
     );
-    print("============================ Main Screen ======================");
-    print("Main Screeen : $apiData");
-    print("---->>>>>>>>>>>>");
-    print(await SharePreferencesDataGetter().getAppAdShowStatus());
 
     return apiData;
   }

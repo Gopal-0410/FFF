@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:fff/flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -164,6 +165,7 @@ class NetworkHelper {
       sharedPreferences.setString('Fb_NativeBanner1', fbNativeBanner1);
       BannerAdDisplayHelper().createBottomBannerAd();
       BannerAdDisplayHelper().createMediumRectangleBannerAd();
+      InterstitialAdDisplayHelper().createInterstitialAd();
       return Future.value(true);
     } else {
       print("========================================");

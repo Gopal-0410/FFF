@@ -1,10 +1,6 @@
 import 'dart:async';
-import 'package:fff/flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
-import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
-import '../flutter_Adsdk/services/network_helper.dart';
-import '../flutter_Adsdk/services/share_preferences_data_getter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,21 +10,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var status;
-  var ad_show_status;
-
   @override
   void didChangeDependencies() async {
-    SharePreferencesDataGetter sp = SharePreferencesDataGetter();
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const StartScreen())));
-    status = await sp.getStatus();
-    ad_show_status = await sp.getAppAdShowStatus();
-    if (ad_show_status == '1') {
-      InterstitialAdDisplayHelper().createInterstitialAd();
-    }
+
     super.didChangeDependencies();
   }
 
@@ -44,13 +32,11 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             margin:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
-            //  duration: Duration(seconds: 2),
             height: 150,
             width: 150,
             decoration: const BoxDecoration(

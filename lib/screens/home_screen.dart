@@ -1,5 +1,3 @@
-import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
-
 import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
 import 'package:flutter/material.dart';
@@ -13,20 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  @override
-  void initState() {
-    super.initState();
-    print('===========> value');
-    print(BannerAdDisplayHelper().isMediumRectangleBannerAdloaded());
-
-  }
-
   @override
   void dispose() {
     super.dispose();
     BannerAdDisplayHelper().bottomAdDisposMethod();
     BannerAdDisplayHelper().mediumRectangleBannerAd();
+    InterstitialAdDisplayHelper().dispose();
   }
 
   @override
@@ -61,9 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //         //here we will put custom ads
       //         ),
       drawer: Drawer(
-        // elevation: 5,
         child: ListView(
-          // padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
               margin: EdgeInsets.all(0),
@@ -79,8 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.grey,
               child: Column(
                 children: [
-                  // color: Colors.black45,
-
                   ListTile(
                     title: const Text(
                       'Trending',
@@ -208,7 +194,17 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                child: BannerAdDisplayHelper().isMediumRectangleBannerAdloaded() ? SizedBox(height: BannerAdDisplayHelper().mediumRectangleBannerHeight(), width: BannerAdDisplayHelper().mediumRectangleBannerWidth(), child: AdWidget(ad: BannerAdDisplayHelper().mediumRectangleBannerAd()),) : null,
+                child: BannerAdDisplayHelper().isMediumRectangleBannerAdloaded()
+                    ? SizedBox(
+                        height: BannerAdDisplayHelper()
+                            .mediumRectangleBannerHeight(),
+                        width: BannerAdDisplayHelper()
+                            .mediumRectangleBannerWidth(),
+                        child: AdWidget(
+                            ad: BannerAdDisplayHelper()
+                                .mediumRectangleBannerAd()),
+                      )
+                    : null,
               ),
               Container(
                 child: SizedBox(

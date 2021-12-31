@@ -12,23 +12,22 @@ BannerAd? _largeBannerAd;
 bool _largeBannerAdLoaded = false;
 
 class BannerAdDisplayHelper {
+  //*****
   //************** Bottom Banner*******************//
+  SharePreferencesDataGetter pref = SharePreferencesDataGetter();
 
   void createBottomBannerAd() async {
+    var adShowStatus = await pref.getAppAdShowStatus();
     _bottomBannerAd = BannerAd(
       adUnitId: await AdHelper.admobBannerAdUnitId,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
-        SharePreferencesDataGetter sp = SharePreferencesDataGetter();
-        if (sp.getAppAdShowStatus() == '1'){
+        if (adShowStatus == '1') {
           _isBannerAdLoaded = true;
+        } else {
+          _isBannerAdLoaded = false;
         }
-        else
-          {
-            _isBannerAdLoaded = false;
-          }
-
       }, onAdFailedToLoad: (ad, error) {
         ad.dispose();
       }),
@@ -69,16 +68,13 @@ class BannerAdDisplayHelper {
       size: AdSize.mediumRectangle,
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
-        if (adshow == '1'){
+        if (adshow == '1') {
           print('here');
           _isMediumRectangelBannerAdLoaded = true;
-        }
-        else
-        {
+        } else {
           print('here failed');
           _isMediumRectangelBannerAdLoaded = false;
         }
-
       }, onAdFailedToLoad: (ad, error) {
         ad.dispose();
       }),
