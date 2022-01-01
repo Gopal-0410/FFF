@@ -56,14 +56,6 @@ class _MyApp extends State<MyApp> {
   }
 
   @override
-  void initState() {
-    print(
-        "============================================= Main Screen ===========================================");
-    // AdClickCount().adClickDecrease();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getinternetstate(),

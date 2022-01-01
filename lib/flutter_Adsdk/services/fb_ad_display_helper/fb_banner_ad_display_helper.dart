@@ -3,28 +3,28 @@ import 'package:fff/flutter_Adsdk/services/fb_ad_display_helper/fb_ad_helper.dar
 import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'package:flutter/cupertino.dart';
 
-FacebookBannerAd? fb_bottom_banner_ad;
+FacebookBannerAd? fbBottomBannerAd;
 
-class FbBannerAdDisplayHelper extends StatelessWidget{
-
+class FbBannerAdDisplayHelper extends StatelessWidget {
   SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
 
-  Future<Widget> CreateFbBottomBannerAd () async{
-    print(' ============= > here facebook ad created');
+  FbBannerAdDisplayHelper({Key? key}) : super(key: key);
+
+  Future<Widget> createFbBottomBannerAd() async {
+    print(
+        ' ================== here facebook ad created ====================================');
     print(FbAdHelper.fbAdUnitId);
     var adShowStatus = pref.getAppAdShowStatus();
-    fb_bottom_banner_ad = FacebookBannerAd(
+    fbBottomBannerAd = FacebookBannerAd(
       placementId: await FbAdHelper.fbAdUnitId,
       bannerSize: BannerSize.STANDARD,
-      listener: (result,value){},
+      listener: (result, value) {},
     );
-    return fb_bottom_banner_ad!;
+    return fbBottomBannerAd!;
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     throw UnimplementedError();
   }
 }

@@ -7,7 +7,7 @@ import 'ad_helper.dart';
 const int maxFailedLoadAttempts = 10;
 InterstitialAd? admobinterstitialAd1;
 int interstitialAd1LoadAttempts = 0;
-bool? frwdAdClickCount;
+bool? _isShowAd;
 
 class InterstitialAdDisplayHelper {
   SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
@@ -40,7 +40,7 @@ class InterstitialAdDisplayHelper {
   }
 
   void showInterstitialAd() async {
-    frwdAdClickCount = await adClickCount.adClickDecrease();
+    _isShowAd = await adClickCount.adClickDecrease();
     if (admobinterstitialAd1 != null) {
       admobinterstitialAd1!.fullScreenContentCallback =
           FullScreenContentCallback(
@@ -54,7 +54,8 @@ class InterstitialAdDisplayHelper {
         },
       );
       var adShowStatus = await pref.getAppAdShowStatus();
-      if (adShowStatus == '1') {
+      // if (adShowStatus == '1') {
+      if (_isShowAd!) {
         admobinterstitialAd1!.show();
       }
     }
