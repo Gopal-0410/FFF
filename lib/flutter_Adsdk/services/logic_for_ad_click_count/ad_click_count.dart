@@ -31,8 +31,11 @@ class AdClickCount {
       String forwardClickInString = forwardClickCount.toString();
       print("value in string: $forwardClickInString");
       pref.setString('xyz', forwardClickInString);
-      int val = await prefData.appforwardClick();
-      print("new stored value :- $val");
+      // int val = await prefData.appforwardClick();
+
+      String? v = await pref.getString('xyz');
+      print("new key : $v");
+      // print("new stored value :- $val");
 
       print(" id ad show :-  false");
 
