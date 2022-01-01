@@ -22,8 +22,6 @@ class _StartScreenState extends State<StartScreen> {
   @override
   void dispose() {
     super.dispose();
-
-    InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
   }
 
   @override
@@ -40,7 +38,7 @@ class _StartScreenState extends State<StartScreen> {
       child: Center(
         child: GestureDetector(
           onTap: () async {
-            InterstitialAdDisplayHelper().showInterstitialAd();
+            await InterstitialAdDisplayHelper().showInterstitialAd();
 
             status == true
                 ? Navigator.of(context).pushNamed('/homeScreen')

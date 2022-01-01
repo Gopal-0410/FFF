@@ -20,57 +20,61 @@ class AdClickCount {
     print("staticForwardCLick count:- $staticForwardClickCount");
     print("dynamicForwarClickCount :- $dynamicForwardClickCount");
     print(
-        "===================================End in the Global call =========================");
+        "===================================End printing =========================");
 
     if (dynamicForwardClickCount! == staticForwardClickCount) {
       print(
-          "=================================== here Start enter in ad show condition =================");
+          "=================================== here Start ad show condition =================");
 
       dynamicForwardClickCount = dynamicForwardClickCount! - 1;
       dynamicForwardClickCountInString = dynamicForwardClickCount.toString();
       pref.setString(
           'dynamicForwardClickCount', dynamicForwardClickCountInString!);
-      pref.reload();
+
       print("staticForwardCLick count:- $staticForwardClickCount");
       print("value in  dynamic variable: $dynamicForwardClickCountInString");
-
-      print(
-          "=================================== here end enter in ad show condition =================");
       print(" id ad show :-  true");
-      return true;
-    } else if (dynamicForwardClickCount! < staticForwardClickCount!) {
       print(
-          "=================================== here Startdo not show ad condition =================");
-      if (dynamicForwardClickCount! < staticForwardClickCount!) {
-        pref.reload();
-        dynamicForwardClickCount = dynamicForwardClickCount! - 1;
-        dynamicForwardClickCountInString = dynamicForwardClickCount.toString();
-        pref.setString(
-            'dynamicForwardClickCount', dynamicForwardClickCountInString!);
-        pref.reload();
-        print("staticForwardCLick count:- $staticForwardClickCount");
-        print("value in dynamic variable: $dynamicForwardClickCountInString");
+          "=================================== here end ad show condition =================");
 
-        if (dynamicForwardClickCount! < 0) {
-          print(
-              "============================= here enter in <0 condition ========================");
+      return true;
+    } else if (dynamicForwardClickCount! <= 0) {
+      print(
+          "============================= here Start in < 0 condition ========================");
 
-          pref.reload();
-          dynamicForwardClickCount = staticForwardClickCount!;
-          print("app dynamic variable :- $dynamicForwardClickCount");
-          String forwardClickInString = dynamicForwardClickCount.toString();
-          print("staticForwardCLick count:- $staticForwardClickCount");
-          print("value in dynamic variable: $forwardClickInString");
-          pref.setString('forwardClickCount', forwardClickInString);
-          print(" id ad show :-  false");
-          pref.reload();
-          print(
-              "============================= here end in <0 condition ========================");
-          return true;
-        }
-        print(
-            "=================================== here End in do not show ad condition =================");
-      }
+      dynamicForwardClickCount = staticForwardClickCount!;
+      //  print("app dynamic variable :- $dynamicForwardClickCount");
+      String forwardClickInString = dynamicForwardClickCount.toString();
+      print("staticForwardCLick count:- $staticForwardClickCount");
+      //  print("value in dynamic variable before set: $forwardClickInString");
+
+      pref.setString('dynamicForwardClickCount', forwardClickInString);
+      //  pref.reload();
+      var val = pref.getString('dynamicForwardClickCount');
+      print("value in dynamic variable after set: $val");
+      print(" id ad show :-  false");
+
+      print(
+          "============================= here end in < 0 condition ========================");
+      return false;
+    } else if (dynamicForwardClickCount! < staticForwardClickCount! &&
+        dynamicForwardClickCount! > 0) {
+      print(
+          "=================================== here Start do not show ad condition =================");
+
+      dynamicForwardClickCount = dynamicForwardClickCount! - 1;
+      dynamicForwardClickCountInString = dynamicForwardClickCount.toString();
+      // print(
+      //     "value in dynamic variable before set: $dynamicForwardClickCountInString");
+      pref.setString(
+          'dynamicForwardClickCount', dynamicForwardClickCountInString!);
+
+      print("staticForwardCLick count:- $staticForwardClickCount");
+      print(
+          "value in dynamic variable after set: $dynamicForwardClickCountInString");
+      print(" id ad show :-  false");
+      print(
+          "=================================== here End in do not show ad condition =================");
 
       return false;
     }

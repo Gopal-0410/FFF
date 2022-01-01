@@ -7,7 +7,7 @@ import 'ad_helper.dart';
 const int maxFailedLoadAttempts = 10;
 InterstitialAd? admobinterstitialAd1;
 int interstitialAd1LoadAttempts = 0;
-bool? _isShowAd;
+bool? isShowAd = false;
 
 class InterstitialAdDisplayHelper {
   SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
@@ -39,8 +39,8 @@ class InterstitialAdDisplayHelper {
     );
   }
 
-  void showInterstitialAd() async {
-    _isShowAd = await adClickCount.adClickDecrease();
+  Future<void> showInterstitialAd() async {
+    isShowAd = await adClickCount.adClickDecrease();
     if (admobinterstitialAd1 != null) {
       admobinterstitialAd1!.fullScreenContentCallback =
           FullScreenContentCallback(
@@ -54,16 +54,24 @@ class InterstitialAdDisplayHelper {
         },
       );
       var adShowStatus = await pref.getAppAdShowStatus();
+      print(
+          "=====================================================show upper $isShowAd =====================");
       // if (adShowStatus == '1') {
-      if (_isShowAd!) {
+      if (isShowAd!) {
+        print(
+            "=====================================================show below $isShowAd =====================");
         admobinterstitialAd1!.show();
       }
     }
   }
 
-  void admobInterstitialAdUnitId1Dispose() {
-    if (_isShowAd!) {
+  Future<void> admobInterstitialAdUnitId1Dispose() async {
+    print(
+        "=====================================================Dispose $isShowAd =====================");
+    if (isShowAd!) {
       admobinterstitialAd1?.dispose();
+    } else {
+      return;
     }
   }
 }
