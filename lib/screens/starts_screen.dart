@@ -38,7 +38,7 @@ class _StartScreenState extends State<StartScreen> {
       child: Center(
         child: GestureDetector(
           onTap: () async {
-            await InterstitialAdDisplayHelper().showInterstitialAd();
+            // await InterstitialAdDisplayHelper().showInterstitialAd();
 
             status == true
                 ? Navigator.of(context).pushNamed('/homeScreen')

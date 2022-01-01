@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,12 @@ class _EndWidgetState extends State<EndWidget> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -34,7 +41,8 @@ class _EndWidgetState extends State<EndWidget> {
             ),
           ),
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              await InterstitialAdDisplayHelper().showInterstitialAd();
               Navigator.of(context)
                   .pushNamed('/END', arguments: [widget.url, widget.name]);
             },
