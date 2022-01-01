@@ -62,6 +62,8 @@ class InterstitialAdDisplayHelper {
   }
 
   void admobInterstitialAdUnitId1Dispose() {
-    admobinterstitialAd1?.dispose();
+    if (_isShowAd!) {
+      admobinterstitialAd1?.dispose();
+    }
   }
 }

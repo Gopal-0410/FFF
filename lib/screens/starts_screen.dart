@@ -20,6 +20,13 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+
+    InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,

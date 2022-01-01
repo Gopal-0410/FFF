@@ -3,55 +3,78 @@ import '../share_preferences_data_getter.dart';
 
 class AdClickCount {
   SharedPreferencesDataGetter prefData = SharedPreferencesDataGetter();
-  int? serverForwardClickCount;
-  int? forwardClickCount;
-  String? frwdClickCount;
+  int? staticForwardClickCount;
+  int? dynamicForwardClickCount;
+  String? dynamicForwardClickCountInString;
 
   Future<bool> adClickDecrease() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var serverFrwdClick = await prefData.getAppMainClickCntSwAd();
+
+    var staticServerFrwdClick = await prefData.getAppMainClickCntSwAd();
+    print("==============================globale method start call");
+
+    staticForwardClickCount = int.parse(staticServerFrwdClick);
+
+    dynamicForwardClickCount = await prefData.appDynamicForwardClick();
+
+    print("staticForwardCLick count:- $staticForwardClickCount");
+    print("dynamicForwarClickCount :- $dynamicForwardClickCount");
     print(
-        "===================================Server ad click  =========================");
-    print("serverFrwdClick :- $serverFrwdClick");
+        "===================================End in the Global call =========================");
 
-    serverForwardClickCount = int.parse(serverFrwdClick);
-
-    print("serverForwardClickCount in double : - $serverForwardClickCount");
-
-    forwardClickCount = await prefData.appforwardClick();
-
-    print("forwardClickCount :- $forwardClickCount");
-    if (forwardClickCount! >= 0) {
+    if (dynamicForwardClickCount! == staticForwardClickCount) {
       print(
-          "=================================== here enter in do not show ad condition =================");
-      forwardClickCount = forwardClickCount! - 1;
-      // frwdClickCount = forwardClickCount.toString();
+          "=================================== here Start enter in ad show condition =================");
 
-      print("app dynamic value :- $forwardClickCount");
-      String forwardClickInString = forwardClickCount.toString();
-      print("value in string: $forwardClickInString");
-      pref.setString('xyz', forwardClickInString);
-      // int val = await prefData.appforwardClick();
+      dynamicForwardClickCount = dynamicForwardClickCount! - 1;
+      dynamicForwardClickCountInString = dynamicForwardClickCount.toString();
+      pref.setString(
+          'dynamicForwardClickCount', dynamicForwardClickCountInString!);
+      pref.reload();
+      print("staticForwardCLick count:- $staticForwardClickCount");
+      print("value in  dynamic variable: $dynamicForwardClickCountInString");
 
-      String? v = await pref.getString('xyz');
-      print("new key : $v");
-      // print("new stored value :- $val");
-
-      print(" id ad show :-  false");
-
-      return false;
-    } else if (forwardClickCount! < 0) {
       print(
-          "=================================== here enter in ad show condition =================");
-      forwardClickCount = serverForwardClickCount!;
-      print("app dynamic value :- $forwardClickCount");
-      String forwardClickInString = forwardClickCount.toString();
-      print("value in string: $forwardClickInString");
-      pref.setString('forwardClickCount', forwardClickInString);
+          "=================================== here end enter in ad show condition =================");
       print(" id ad show :-  true");
       return true;
-    }
+    } else if (dynamicForwardClickCount! < staticForwardClickCount!) {
+      print(
+          "=================================== here Startdo not show ad condition =================");
+      if (dynamicForwardClickCount! < staticForwardClickCount!) {
+        pref.reload();
+        dynamicForwardClickCount = dynamicForwardClickCount! - 1;
+        dynamicForwardClickCountInString = dynamicForwardClickCount.toString();
+        pref.setString(
+            'dynamicForwardClickCount', dynamicForwardClickCountInString!);
+        pref.reload();
+        print("staticForwardCLick count:- $staticForwardClickCount");
+        print("value in dynamic variable: $dynamicForwardClickCountInString");
 
+        if (dynamicForwardClickCount! < 0) {
+          print(
+              "============================= here enter in <0 condition ========================");
+
+          pref.reload();
+          dynamicForwardClickCount = staticForwardClickCount!;
+          print("app dynamic variable :- $dynamicForwardClickCount");
+          String forwardClickInString = dynamicForwardClickCount.toString();
+          print("staticForwardCLick count:- $staticForwardClickCount");
+          print("value in dynamic variable: $forwardClickInString");
+          pref.setString('forwardClickCount', forwardClickInString);
+          print(" id ad show :-  false");
+          pref.reload();
+          print(
+              "============================= here end in <0 condition ========================");
+          return true;
+        }
+        print(
+            "=================================== here End in do not show ad condition =================");
+      }
+
+      return false;
+    }
+    print("==============================globale method end call");
     return false;
   }
 }

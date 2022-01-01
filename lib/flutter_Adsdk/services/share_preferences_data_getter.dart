@@ -206,12 +206,12 @@ class SharedPreferencesDataGetter {
     return Future.value(status);
   }
 
-  Future<int> appforwardClick() async {
-    String? appforwardClick;
+  Future<int> appDynamicForwardClick() async {
+    String? forwardClickCount;
     int? appFrwdClick;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    appforwardClick = sharedPreferences.getString('app_mainClickCntSwAd');
-    appFrwdClick = int.tryParse(appforwardClick!);
+    forwardClickCount = sharedPreferences.getString('dynamicForwardClickCount');
+    appFrwdClick = int.tryParse(forwardClickCount!);
     return Future.value(appFrwdClick);
   }
 
