@@ -1,6 +1,3 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, avoid_print
-
-import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'package:fff/screens/elitepass_screen.dart';
 import 'package:fff/screens/events_screen.dart';
 import 'package:fff/screens/faded_wheel.dart';
@@ -16,7 +13,9 @@ import 'package:fff/screens/starts_screen.dart';
 import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
+import 'flutter_Adsdk/services/logic_for_ad_click_count/ad_click_count.dart';
 import 'flutter_Adsdk/services/network_helper.dart';
+import 'flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'screens/dialogbox.dart';
 import 'screens/end_screen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -35,8 +34,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  var internetStatus;
-  var status;
+  bool? internetStatus;
   bool load = false;
 
   Future getinternetstate() async {
@@ -59,6 +57,9 @@ class _MyApp extends State<MyApp> {
 
   @override
   void initState() {
+    print(
+        "============================================= Main Screen ===========================================");
+    // AdClickCount().adClickDecrease();
     super.initState();
   }
 
