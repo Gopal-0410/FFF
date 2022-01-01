@@ -1,5 +1,12 @@
+import 'dart:io';
+
+import 'package:facebook_audience_network/facebook_audience_network.dart';
+import 'package:fff/flutter_Adsdk/services/fb_ad_display_helper/fb_ad_helper.dart';
+import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
+
 import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
+import '../flutter_Adsdk/services/fb_ad_display_helper/fb_banner_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -11,12 +18,54 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  bool _isinterstitail_adLoaded = false;
+  @override
+  void initState() {
+    super.initState();
+    FacebookAudienceNetwork.init(testingId: '6524241f-5030-4598-8869-f74193bdd128');
+    loadInterstitalAd();
+  }
+
+  @override
+  void didChangeDependencies() async{
+    super.didChangeDependencies();
+    SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();
+    print('here app click count');
+    print(await sp.getAppMainClickCntSwAd());
+  }
+
   @override
   void dispose() {
     super.dispose();
     BannerAdDisplayHelper().bottomAdDisposMethod();
     BannerAdDisplayHelper().mediumRectangleBannerAd();
     InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
+  }
+
+  void loadInterstitalAd (){
+    FacebookInterstitialAd.loadInterstitialAd(
+      placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
+      listener: (result,value){
+        print('InterstitalAd: $result--->$value');
+        if (result == InterstitialAdResult.LOADED){
+          _isinterstitail_adLoaded = true;
+        }
+        if (result == InterstitialAdResult.DISMISSED && value['invalidated'] == true){
+          _isinterstitail_adLoaded = false;
+          loadInterstitalAd();
+        }
+      }
+    );
+  }
+
+  void showInterstitalAd(){
+    if (_isinterstitail_adLoaded == true){
+      FacebookInterstitialAd.showInterstitialAd();
+    }
+    else{
+      print('flutter ads yet not loaded');
+    }
   }
 
   @override
@@ -227,6 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: GestureDetector(
                               onTap: () async {
+                                // showInterstitalAd();
                                 InterstitialAdDisplayHelper()
                                     .showInterstitialAd();
                                 var val = name[index];
@@ -251,6 +301,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       );
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment(1, 0),
+                  child: FacebookBannerAd(
+                    placementId: Platform.isAndroid ? 'IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID' : "YOUR_IOS_PLACEMENT_ID",
+                    bannerSize: BannerSize.STANDARD,
+                    listener: (result, value) {
+                      switch (result) {
+                        case BannerAdResult.ERROR:
+                          print("Error: $value");
+                          break;
+                        case BannerAdResult.LOADED:
+                          print("Loaded: $value");
+                          break;
+                        case BannerAdResult.CLICKED:
+                          print("Clicked: $value");
+                          break;
+                        case BannerAdResult.LOGGING_IMPRESSION:
+                          print("Logging Impression: $value");
+                          break;
+                      }
                     },
                   ),
                 ),

@@ -163,6 +163,8 @@ class NetworkHelper {
       sharedPreferences.setString('Fb_Native1', fbNative1);
       sharedPreferences.setString('Fb_RewardedVideo1', fbRewardedVideo1);
       sharedPreferences.setString('Fb_NativeBanner1', fbNativeBanner1);
+      sharedPreferences.setString('forwardClickCount', appMainClickCntSwAd);
+
       BannerAdDisplayHelper().createBottomBannerAd();
       BannerAdDisplayHelper().createMediumRectangleBannerAd();
       InterstitialAdDisplayHelper().createadmobInterstitialAdUnitId1();

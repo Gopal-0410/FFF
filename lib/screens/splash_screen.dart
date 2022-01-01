@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() async {
+    SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();
+    print('splashscreen here app click count');
+    print(await sp.getAppMainClickCntSwAd());
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,

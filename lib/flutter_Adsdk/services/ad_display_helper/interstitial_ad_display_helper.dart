@@ -1,3 +1,5 @@
+import 'package:fff/flutter_Adsdk/services/logic_for_ad_click_count/ad_click_count.dart';
+
 import '../share_preferences_data_getter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
@@ -5,9 +7,11 @@ import 'ad_helper.dart';
 const int maxFailedLoadAttempts = 10;
 InterstitialAd? admobinterstitialAd1;
 int interstitialAd1LoadAttempts = 0;
+bool? frwdAdClickCount;
 
 class InterstitialAdDisplayHelper {
   SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
+  AdClickCount adClickCount = AdClickCount();
 
   void createadmobInterstitialAdUnitId1() async {
     var adShowStatus = await pref.getAppAdShowStatus();
@@ -36,6 +40,7 @@ class InterstitialAdDisplayHelper {
   }
 
   void showInterstitialAd() async {
+    frwdAdClickCount = await adClickCount.adClickDecrease();
     if (admobinterstitialAd1 != null) {
       admobinterstitialAd1!.fullScreenContentCallback =
           FullScreenContentCallback(
