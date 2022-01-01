@@ -1,12 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:facebook_audience_network/facebook_audience_network.dart';
-import 'package:fff/flutter_Adsdk/services/fb_ad_display_helper/fb_ad_helper.dart';
 import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
-
 import '../flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import '../flutter_Adsdk/services/ad_display_helper/banner_ad_display_helper.dart';
-import '../flutter_Adsdk/services/fb_ad_display_helper/fb_banner_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -18,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _isinterstitail_adLoaded = false;
+  bool isInterstitailAdLoaded = false;
   @override
   void initState() {
     super.initState();
@@ -31,8 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();
-    print('here app click count');
-    print(await sp.getAppMainClickCntSwAd());
+    log('here app click count');
+    log(await sp.getAppMainClickCntSwAd());
   }
 
   @override
@@ -47,23 +44,23 @@ class _HomeScreenState extends State<HomeScreen> {
     FacebookInterstitialAd.loadInterstitialAd(
         placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
         listener: (result, value) {
-          print('InterstitalAd: $result--->$value');
+          log('InterstitalAd: $result--->$value');
           if (result == InterstitialAdResult.LOADED) {
-            _isinterstitail_adLoaded = true;
+            isInterstitailAdLoaded = true;
           }
           if (result == InterstitialAdResult.DISMISSED &&
               value['invalidated'] == true) {
-            _isinterstitail_adLoaded = false;
+            isInterstitailAdLoaded = false;
             loadInterstitalAd();
           }
         });
   }
 
   void showInterstitalAd() {
-    if (_isinterstitail_adLoaded == true) {
+    if (isInterstitailAdLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd();
     } else {
-      print('flutter ads yet not loaded');
+      log('flutter ads yet not loaded');
     }
   }
 
@@ -254,59 +251,57 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     : null,
               ),
-              Container(
-                child: SizedBox(
-                  height: (MediaQuery.of(context).size.height -
-                          AppBar().preferredSize.height) *
-                      0.49,
-                  child: ListView.builder(
-                    itemCount: name.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Center(
+              SizedBox(
+                height: (MediaQuery.of(context).size.height -
+                        AppBar().preferredSize.height) *
+                    0.49,
+                child: ListView.builder(
+                  itemCount: name.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Center(
+                      child: Container(
+                        height: 104,
+                        margin: const EdgeInsets.only(top: 10),
+                        width: MediaQuery.of(context).size.width * 0.9,
                         child: Container(
-                          height: 104,
-                          margin: const EdgeInsets.only(top: 10),
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          child: Container(
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            child: GestureDetector(
-                              onTap: () async {
-                                // showInterstitalAd();
-                                InterstitialAdDisplayHelper()
-                                    .showInterstitialAd();
-                                var val = name[index];
+                          ),
+                          child: GestureDetector(
+                            onTap: () async {
+                              // showInterstitalAd();
+                              InterstitialAdDisplayHelper()
+                                  .showInterstitialAd();
+                              var val = name[index];
 
-                                await Navigator.of(context)
-                                    .pushNamed('/$val', arguments: name[index]);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 15.0,
-                                  top: 5,
-                                  left: 15,
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: AssetImage(image[index]))),
-                                ),
+                              await Navigator.of(context)
+                                  .pushNamed('/$val', arguments: name[index]);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                right: 15.0,
+                                top: 5,
+                                left: 15,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(image[index]))),
                               ),
                             ),
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
               Expanded(
                 child: Container(
-                  alignment: Alignment(1, 0),
+                  alignment: const Alignment(1, 0),
                   child: FacebookBannerAd(
                     placementId: Platform.isAndroid
                         ? 'IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID'
@@ -315,16 +310,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     listener: (result, value) {
                       switch (result) {
                         case BannerAdResult.ERROR:
-                          print("Error: $value");
+                          log("Error: $value");
                           break;
                         case BannerAdResult.LOADED:
-                          print("Loaded: $value");
+                          log("Loaded: $value");
                           break;
                         case BannerAdResult.CLICKED:
-                          print("Clicked: $value");
+                          log("Clicked: $value");
                           break;
                         case BannerAdResult.LOGGING_IMPRESSION:
-                          print("Logging Impression: $value");
+                          log("Logging Impression: $value");
                           break;
                       }
                     },

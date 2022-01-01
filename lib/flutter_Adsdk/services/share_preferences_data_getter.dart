@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesDataGetter {
-  Future getStatus() async {
-    var status;
+  Future<bool> getStatus() async {
+    bool? status;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     status = sharedPreferences.getBool('STATUS');
 
@@ -94,7 +94,7 @@ class SharedPreferencesDataGetter {
     return Future.value(status);
   }
 
-  Future getAppAdShowStatus() async {
+  Future<String> getAppAdShowStatus() async {
     String? status;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     status = sharedPreferences.getString('app_adShowStatus');

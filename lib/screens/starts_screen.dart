@@ -10,7 +10,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  var status;
+  bool? status;
   @override
   void didChangeDependencies() async {
     SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();

@@ -68,10 +68,8 @@ class BannerAdDisplayHelper {
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
         if (adshow == '1') {
-          print('here');
           _isMediumRectangelBannerAdLoaded = true;
         } else {
-          print('here failed');
           _isMediumRectangelBannerAdLoaded = false;
         }
       }, onAdFailedToLoad: (ad, error) {
@@ -114,10 +112,8 @@ class BannerAdDisplayHelper {
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
         if (adshow == '1') {
-          print('here');
           _largeBannerAdLoaded = true;
         } else {
-          print('here failed');
           _largeBannerAdLoaded = false;
         }
       }, onAdFailedToLoad: (ad, error) {
@@ -160,10 +156,8 @@ class BannerAdDisplayHelper {
       request: const AdRequest(),
       listener: BannerAdListener(onAdLoaded: (_) {
         if (adshow == '1') {
-          print('here');
           _fullBannerAdLoaded = true;
         } else {
-          print('here failed');
           _fullBannerAdLoaded = false;
         }
       }, onAdFailedToLoad: (ad, error) {

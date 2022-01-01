@@ -3,6 +3,7 @@ import './ad_display_helper/banner_ad_display_helper.dart';
 import './ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer';
 
 class NetworkHelper {
   String url;
@@ -23,7 +24,6 @@ class NetworkHelper {
     });
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      print(data);
 
       var status = data['STATUS'];
       var appName = data['APP_SETTINGS']['app_name'];
@@ -171,8 +171,8 @@ class NetworkHelper {
       InterstitialAdDisplayHelper().createadmobInterstitialAdUnitId1();
       return Future.value(true);
     } else {
-      print("========================================");
-      print("Fail to load Api");
+      log('====================================================================================');
+      log('Fail to load Api');
 
       throw Exception('Failed To load Api');
     }
