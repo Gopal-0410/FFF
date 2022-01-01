@@ -56,8 +56,8 @@ class InterstitialAdDisplayHelper {
       var adShowStatus = await pref.getAppAdShowStatus();
       print(
           "=====================================================show upper $isShowAd =====================");
-      // if (adShowStatus == '1') {
-      if (isShowAd!) {
+      if (adShowStatus == '1' && isShowAd!) {
+        // if (isShowAd!) {
         print(
             "=====================================================show below $isShowAd =====================");
         admobinterstitialAd1!.show();
@@ -65,10 +65,11 @@ class InterstitialAdDisplayHelper {
     }
   }
 
-  Future<void> admobInterstitialAdUnitId1Dispose() async {
+  void admobInterstitialAdUnitId1Dispose() async {
+    var adShowStatus = await pref.getAppAdShowStatus();
     print(
         "=====================================================Dispose $isShowAd =====================");
-    if (isShowAd!) {
+    if (adShowStatus == '1' && isShowAd!) {
       admobinterstitialAd1?.dispose();
     } else {
       return;

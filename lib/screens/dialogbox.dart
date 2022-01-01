@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 
 class DialogBox extends StatefulWidget {
@@ -23,7 +24,8 @@ class _DialogBoxState extends State<DialogBox> {
                 textStyle:
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
             child: const Text("Retry"),
-            onPressed: () {
+            onPressed: () async {
+              await InterstitialAdDisplayHelper().showInterstitialAd();
               setState(() {});
             },
           ),

@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -68,6 +69,7 @@ class ProDressScreen extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () async {
                             var val = tips[index];
+                            InterstitialAdDisplayHelper().showInterstitialAd();
                             await Navigator.of(context)
                                 .pushNamed('/$val', arguments: tips[index]);
                           },

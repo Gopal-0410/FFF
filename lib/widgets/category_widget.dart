@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatelessWidget {
@@ -22,7 +23,8 @@ class CategoryWidget extends StatelessWidget {
             ),
           ),
           child: GestureDetector(
-            onTap: () {
+            onTap: () async {
+              await InterstitialAdDisplayHelper().showInterstitialAd();
               Navigator.of(context).pushNamed('/$name', arguments: name);
             },
             child: Padding(

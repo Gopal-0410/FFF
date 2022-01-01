@@ -1,7 +1,5 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
-
 import '../widgets/end_widget.dart';
 
 class GunScreen extends StatelessWidget {

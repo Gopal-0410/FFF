@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 
 class HowToUseScreen extends StatelessWidget {
   const HowToUseScreen({Key? key}) : super(key: key);

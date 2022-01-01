@@ -18,17 +18,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   bool _isinterstitail_adLoaded = false;
   @override
   void initState() {
     super.initState();
-    FacebookAudienceNetwork.init(testingId: '6524241f-5030-4598-8869-f74193bdd128');
+    FacebookAudienceNetwork.init(
+        testingId: '6524241f-5030-4598-8869-f74193bdd128');
     loadInterstitalAd();
   }
 
   @override
-  void didChangeDependencies() async{
+  void didChangeDependencies() async {
     super.didChangeDependencies();
     SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();
     print('here app click count');
@@ -40,30 +40,29 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
     BannerAdDisplayHelper().bottomAdDisposMethod();
     BannerAdDisplayHelper().mediumRectangleBannerAd();
-    InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
+    //  InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
   }
 
-  void loadInterstitalAd (){
+  void loadInterstitalAd() {
     FacebookInterstitialAd.loadInterstitialAd(
-      placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
-      listener: (result,value){
-        print('InterstitalAd: $result--->$value');
-        if (result == InterstitialAdResult.LOADED){
-          _isinterstitail_adLoaded = true;
-        }
-        if (result == InterstitialAdResult.DISMISSED && value['invalidated'] == true){
-          _isinterstitail_adLoaded = false;
-          loadInterstitalAd();
-        }
-      }
-    );
+        placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
+        listener: (result, value) {
+          print('InterstitalAd: $result--->$value');
+          if (result == InterstitialAdResult.LOADED) {
+            _isinterstitail_adLoaded = true;
+          }
+          if (result == InterstitialAdResult.DISMISSED &&
+              value['invalidated'] == true) {
+            _isinterstitail_adLoaded = false;
+            loadInterstitalAd();
+          }
+        });
   }
 
-  void showInterstitalAd(){
-    if (_isinterstitail_adLoaded == true){
+  void showInterstitalAd() {
+    if (_isinterstitail_adLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd();
-    }
-    else{
+    } else {
       print('flutter ads yet not loaded');
     }
   }
@@ -309,7 +308,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   alignment: Alignment(1, 0),
                   child: FacebookBannerAd(
-                    placementId: Platform.isAndroid ? 'IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID' : "YOUR_IOS_PLACEMENT_ID",
+                    placementId: Platform.isAndroid
+                        ? 'IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID'
+                        : "YOUR_IOS_PLACEMENT_ID",
                     bannerSize: BannerSize.STANDARD,
                     listener: (result, value) {
                       switch (result) {

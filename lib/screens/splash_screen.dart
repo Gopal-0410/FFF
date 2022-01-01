@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:fff/flutter_Adsdk/services/logic_for_ad_click_count/ad_click_count.dart';
-import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
+
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
 

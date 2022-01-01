@@ -1,3 +1,4 @@
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 
 class EndScreen extends StatefulWidget {
@@ -77,7 +78,9 @@ class _EndScreenState extends State<EndScreen> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: GestureDetector(
-                      onTap: () {
+                      onTap: () async {
+                        await InterstitialAdDisplayHelper()
+                            .showInterstitialAd();
                         showDialog(
                           //barrierColor: Theme.of(context).canvasColor,
                           context: context,

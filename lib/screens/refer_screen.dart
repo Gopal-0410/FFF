@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+
 import 'package:share/share.dart';
 
 class ReferScreen extends StatelessWidget {
@@ -75,6 +75,7 @@ class ReferScreen extends StatelessWidget {
                     ),
                   ),
                   onTap: () async {
+                    InterstitialAdDisplayHelper().showInterstitialAd();
                     _shareContent(context);
                   },
                 ),
