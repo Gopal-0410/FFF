@@ -1,4 +1,5 @@
-import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
+import 'package:fff/flutter_Adsdk/services/admob_ad_display_helper/admob_app_open_ad_display_helper.dart';
+import 'package:fff/flutter_Adsdk/services/admob_ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/share_preferences_data_getter.dart';
 
@@ -12,17 +13,17 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   bool? status;
   @override
+  void initState() {
+    AdmobAppOpenAdDisplayHelper().showAdmobAppOpenAd();
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() async {
     SharedPreferencesDataGetter sp = SharedPreferencesDataGetter();
     status = await sp.getStatus();
 
     super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    //  InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
   }
 
   @override

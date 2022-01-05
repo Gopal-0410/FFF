@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:math';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesDataGetter {
@@ -278,10 +281,12 @@ class SharedPreferencesDataGetter {
     return Future.value(status);
   }
 
-  Future getAdmobAppOpen1() async {
+  Future<String> getAdmobAppOpenId() async {
     String? status;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    status = sharedPreferences.getString('admob_AppOpen1');
+    status = sharedPreferences.getString('admob_AppOpen');
+    print("======================================================");
+    print("$status");
     return Future.value(status);
   }
 

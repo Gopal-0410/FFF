@@ -1,4 +1,4 @@
-import 'package:fff/flutter_Adsdk/services/ad_display_helper/interstitial_ad_display_helper.dart';
+import 'package:fff/flutter_Adsdk/services/admob_ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatelessWidget {

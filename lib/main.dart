@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fff/screens/elitepass_screen.dart';
 import 'package:fff/screens/events_screen.dart';
 import 'package:fff/screens/faded_wheel.dart';
@@ -14,15 +16,19 @@ import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
 
+import 'flutter_Adsdk/services/admob_ad_display_helper/admob_app_open_ad_display_helper.dart';
 import 'flutter_Adsdk/services/network_helper.dart';
 
+import 'flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'screens/dialogbox.dart';
 import 'screens/end_screen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
+//  await SharedPreferencesDataGetter().getAdmobAppOpenId();
+
   runApp(const MyApp());
 }
 
@@ -36,6 +42,7 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   bool? internetStatus;
   bool load = false;
+  bool? isApiCalled;
 
   Future<bool> getinternetstate() async {
     InternetConnection internetConnection = InternetConnection();
@@ -46,7 +53,7 @@ class _MyApp extends State<MyApp> {
   Future<bool> getApiData() async {
     NetworkHelper networkHelper =
         NetworkHelper('https://adzzapps.com/AppsManager/api/v1/get_app.php');
-    var apiData = await networkHelper.getApiData(
+    bool apiData = await networkHelper.getApiData(
       packageName: 'com.example.fff',
       hashKey: '4nZYf4oVH16zBTF7ZWElrsrcpvU=',
       appOpenID: '26894',
@@ -54,6 +61,15 @@ class _MyApp extends State<MyApp> {
     );
 
     return apiData;
+  }
+
+  @override
+  void didChangeDependencies() async {
+    isApiCalled = await getApiData();
+
+    print("Main method :- $isApiCalled");
+
+    super.didChangeDependencies();
   }
 
   @override
@@ -92,7 +108,7 @@ class _MyApp extends State<MyApp> {
               DialogBox.routName: (BuildContext context) => const DialogBox(),
             },
             home: internetStatus == true
-                ? load != getApiData()
+                ? load != isApiCalled
                     ? const SplashScreen()
                     : const Text(
                         "Error in the Main ===============================================================")
