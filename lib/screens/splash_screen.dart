@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fff/flutter_Adsdk/services/admob_ad_display_helper/admob_app_open_ad_display_helper.dart';
 import 'package:fff/screens/starts_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    // AdmobAppOpenAdDisplayHelper().showAdmobAppOpenAd();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() async {
+    // await AdmobAppOpenAdDisplayHelper().showAdmobAppOpenAd();
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,

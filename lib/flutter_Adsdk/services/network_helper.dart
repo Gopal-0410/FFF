@@ -1,9 +1,11 @@
 import 'dart:convert';
-import './ad_display_helper/banner_ad_display_helper.dart';
-import './ad_display_helper/interstitial_ad_display_helper.dart';
+import './admob_ad_display_helper/banner_ad_display_helper.dart';
+import './admob_ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
+
+import 'admob_ad_display_helper/admob_app_open_ad_display_helper.dart';
 
 class NetworkHelper {
   String url;
@@ -79,7 +81,7 @@ class NetworkHelper {
       var admobRewardedVideo1 = data['PLACEMENT']['Admob']['RewardedVideo1'];
       var admobRewardedInterstitial1 =
           data['PLACEMENT']['Admob']['RewardedInterstitial1'];
-      var admobAppOpen1 = data['PLACEMENT']['Admob']['AppOpen1'];
+      var admobAppOpen = data['PLACEMENT']['Admob']['AppOpen1'];
 
       // --------- >>>>>>> fb Placement Data
       var fbAdsShowStatus =
@@ -153,7 +155,7 @@ class NetworkHelper {
       sharedPreferences.setString('admob_RewardedVideo1', admobRewardedVideo1);
       sharedPreferences.setString(
           'admob_RewardedInterstitial1', admobRewardedInterstitial1);
-      sharedPreferences.setString('admob_AppOpen1', admobAppOpen1);
+      sharedPreferences.setString('admob_AppOpen', admobAppOpen);
 
       //Fb Ads Placement data set in the shared preference
       sharedPreferences.setString('Fb_ad_showAdStatus', fbAdsShowStatus);
@@ -169,6 +171,7 @@ class NetworkHelper {
       BannerAdDisplayHelper().createBottomBannerAd();
       BannerAdDisplayHelper().createMediumRectangleBannerAd();
       InterstitialAdDisplayHelper().createadmobInterstitialAdUnitId1();
+      AdmobAppOpenAdDisplayHelper().loadAdmobAppOpenAd();
       return Future.value(true);
     } else {
       log('====================================================================================');
