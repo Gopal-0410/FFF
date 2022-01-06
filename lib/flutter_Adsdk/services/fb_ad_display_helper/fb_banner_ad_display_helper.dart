@@ -16,43 +16,43 @@ class _ShowFbBannerAdsState extends State<ShowFbBannerAds> {
   FacebookBannerAd? fbBottomBannerAd;
   FbAdHelper fbAdHelperVariable = FbAdHelper();
 
-  @override
-  void initState() {
-    super.initState();
-    check();
-    print('$fbAdUnitId  ==============>>>>>>>>>============');
-  }
+  Future<String> check() async {
+    fbAdUnitId = await fbAdHelperVariable.fbAdUnitId;
 
-  void check()async{
-    fbAdUnitId= await fbAdHelperVariable.fbAdUnitId;
-    log(fbAdUnitId!);
-    print('================ > $fbAdUnitId! ===============>');
+    return fbAdUnitId!;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: const Alignment(1, 0),
-      child: fbAdUnitId == null ? null : FacebookBannerAd(
-        placementId:fbAdUnitId!,
-        bannerSize: BannerSize.STANDARD,
-        listener: (result, value) {
-          switch (result) {
-            case BannerAdResult.ERROR:
-              log("Error: $value");
-              break;
-            case BannerAdResult.LOADED:
-              log("Loaded: $value");
-              break;
-            case BannerAdResult.CLICKED:
-              log("Clicked: $value");
-              break;
-            case BannerAdResult.LOGGING_IMPRESSION:
-              log("Logging Impression: $value");
-              break;
-          }
-        },
-      ),
+    return FutureBuilder(
+      future: check(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          alignment: const Alignment(1, 0),
+          child: snapshot.hasData
+              ? FacebookBannerAd(
+                  placementId: fbAdUnitId!,
+                  bannerSize: BannerSize.STANDARD,
+                  listener: (result, value) {
+                    switch (result) {
+                      case BannerAdResult.ERROR:
+                        log("Error: $value");
+                        break;
+                      case BannerAdResult.LOADED:
+                        log("Loaded: $value");
+                        break;
+                      case BannerAdResult.CLICKED:
+                        log("Clicked: $value");
+                        break;
+                      case BannerAdResult.LOGGING_IMPRESSION:
+                        log("Logging Impression: $value");
+                        break;
+                    }
+                  },
+                )
+              : null,
+        );
+      },
     );
   }
 }
