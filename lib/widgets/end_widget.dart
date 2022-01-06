@@ -42,7 +42,7 @@ class _EndWidgetState extends State<EndWidget> {
           ),
           child: GestureDetector(
             onTap: () async {
-              await InterstitialAdDisplayHelper().showInterstitialAd();
+              await InterstitialAdDisplayHelper().showForwardInterstitialAd();
               Navigator.of(context)
                   .pushNamed('/END', arguments: [widget.url, widget.name]);
             },

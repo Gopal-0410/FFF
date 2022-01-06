@@ -24,7 +24,7 @@ class CategoryWidget extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () async {
-              await InterstitialAdDisplayHelper().showInterstitialAd();
+              await InterstitialAdDisplayHelper().showForwardInterstitialAd();
               Navigator.of(context).pushNamed('/$name', arguments: name);
             },
             child: Padding(

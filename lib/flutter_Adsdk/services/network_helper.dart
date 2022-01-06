@@ -170,7 +170,7 @@ class NetworkHelper {
 
       BannerAdDisplayHelper().createBottomBannerAd();
       BannerAdDisplayHelper().createMediumRectangleBannerAd();
-      InterstitialAdDisplayHelper().createadmobInterstitialAdUnitId1();
+      InterstitialAdDisplayHelper().createForwardAdmobInterstitialAdUnit();
       AdmobAppOpenAdDisplayHelper().loadAdmobAppOpenAd();
       return Future.value(true);
     } else {

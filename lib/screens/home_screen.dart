@@ -276,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Expanded(
-                child: ShowFbBannerAds(),
+                child: ShowStandardFbBannerAd(),
               ),
             ],
           ),

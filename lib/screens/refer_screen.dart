@@ -75,7 +75,7 @@ class ReferScreen extends StatelessWidget {
                     ),
                   ),
                   onTap: () async {
-                    InterstitialAdDisplayHelper().showInterstitialAd();
+                    InterstitialAdDisplayHelper().showForwardInterstitialAd();
                     _shareContent(context);
                   },
                 ),

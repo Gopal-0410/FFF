@@ -69,7 +69,8 @@ class ProDressScreen extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () async {
                             var val = tips[index];
-                            InterstitialAdDisplayHelper().showInterstitialAd();
+                            InterstitialAdDisplayHelper()
+                                .showForwardInterstitialAd();
                             await Navigator.of(context)
                                 .pushNamed('/$val', arguments: tips[index]);
                           },

@@ -80,7 +80,7 @@ class _EndScreenState extends State<EndScreen> {
                     child: GestureDetector(
                       onTap: () async {
                         await InterstitialAdDisplayHelper()
-                            .showInterstitialAd();
+                            .showForwardInterstitialAd();
                         showDialog(
                           //barrierColor: Theme.of(context).canvasColor,
                           context: context,

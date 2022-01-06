@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ad_helper.dart';
 
 const int maxFailedLoadAttempts = 10;
-InterstitialAd? admobinterstitialAd1;
+InterstitialAd? admobForwardInterstitialAd;
 int interstitialAd1LoadAttempts = 0;
 bool? isShowAd = false;
 
@@ -13,7 +13,7 @@ class InterstitialAdDisplayHelper {
   SharedPreferencesDataGetter pref = SharedPreferencesDataGetter();
   AdClickCount adClickCount = AdClickCount();
 
-  void createadmobInterstitialAdUnitId1() async {
+  void createForwardAdmobInterstitialAdUnit() async {
     var adShowStatus = await pref.getAppAdShowStatus();
     InterstitialAd.load(
       adUnitId: await AdHelper.admobInterstitialAdUnitId1,
@@ -21,51 +21,51 @@ class InterstitialAdDisplayHelper {
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
           if (adShowStatus == '1') {
-            admobinterstitialAd1 = ad;
+            admobForwardInterstitialAd = ad;
             interstitialAd1LoadAttempts = 0;
           }
         },
         onAdFailedToLoad: (LoadAdError error) {
           if (adShowStatus == '1') {
             interstitialAd1LoadAttempts += 1;
-            admobinterstitialAd1 = null;
+            admobForwardInterstitialAd = null;
           }
 
           if (interstitialAd1LoadAttempts <= maxFailedLoadAttempts) {
-            createadmobInterstitialAdUnitId1();
+            createForwardAdmobInterstitialAdUnit();
           }
         },
       ),
     );
   }
 
-  Future<void> showInterstitialAd() async {
+  Future<void> showForwardInterstitialAd() async {
     isShowAd = await adClickCount.adClickDecrease();
-    if (admobinterstitialAd1 != null) {
-      admobinterstitialAd1!.fullScreenContentCallback =
+    if (admobForwardInterstitialAd != null) {
+      admobForwardInterstitialAd!.fullScreenContentCallback =
           FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
           ad.dispose();
-          createadmobInterstitialAdUnitId1();
+          createForwardAdmobInterstitialAdUnit();
         },
         onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
           ad.dispose();
-          createadmobInterstitialAdUnitId1();
+          createForwardAdmobInterstitialAdUnit();
         },
       );
       var adShowStatus = await pref.getAppAdShowStatus();
 
       if (adShowStatus == '1' && isShowAd!) {
-        admobinterstitialAd1!.show();
+        admobForwardInterstitialAd!.show();
       }
     }
   }
 
-  void admobInterstitialAdUnitId1Dispose() async {
+  void createForwardAdmobInterstitialAdUnitDispose() async {
     var adShowStatus = await pref.getAppAdShowStatus();
 
     if (adShowStatus == '1' && isShowAd!) {
-      admobinterstitialAd1?.dispose();
+      admobForwardInterstitialAd?.dispose();
     } else {
       return;
     }

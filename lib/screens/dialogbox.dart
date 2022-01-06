@@ -25,7 +25,7 @@ class _DialogBoxState extends State<DialogBox> {
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
             child: const Text("Retry"),
             onPressed: () async {
-              await InterstitialAdDisplayHelper().showInterstitialAd();
+              await InterstitialAdDisplayHelper().showForwardInterstitialAd();
               setState(() {});
             },
           ),
