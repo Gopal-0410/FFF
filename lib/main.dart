@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fff/screens/elitepass_screen.dart';
 import 'package:fff/screens/events_screen.dart';
 import 'package:fff/screens/faded_wheel.dart';
@@ -16,10 +14,8 @@ import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
 
-import 'flutter_Adsdk/services/admob_ad_display_helper/admob_app_open_ad_display_helper.dart';
 import 'flutter_Adsdk/services/network_helper.dart';
 
-import 'flutter_Adsdk/services/share_preferences_data_getter.dart';
 import 'screens/dialogbox.dart';
 import 'screens/end_screen.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -66,8 +62,6 @@ class _MyApp extends State<MyApp> {
   @override
   void didChangeDependencies() async {
     isApiCalled = await getApiData();
-
-    print("Main method :- $isApiCalled");
 
     super.didChangeDependencies();
   }
