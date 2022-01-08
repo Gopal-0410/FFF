@@ -17,12 +17,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+ // bool isInterstitailAdLoaded = false;
+
   @override
   void initState() {
     super.initState();
     FacebookAudienceNetwork.init(
         testingId: '6524241f-5030-4598-8869-f74193bdd128');
-    ShowFbInterstitalAds().loadInterstitalAd();
+  //  loadInterstitalAd();
   }
 
   @override
@@ -40,6 +43,31 @@ class _HomeScreenState extends State<HomeScreen> {
     BannerAdDisplayHelper().mediumRectangleBannerAd();
     //  InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
   }
+
+  // void loadInterstitalAd (){
+  //   FacebookInterstitialAd.loadInterstitialAd(
+  //       placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
+  //       listener: (result,value){
+  //         print('InterstitalAd: $result--->$value');
+  //         if (result == InterstitialAdResult.LOADED){
+  //           isInterstitailAdLoaded = true;
+  //         }
+  //         if (result == InterstitialAdResult.DISMISSED && value['invalidated'] == true){
+  //           isInterstitailAdLoaded = false;
+  //           loadInterstitalAd();
+  //         }
+  //       }
+  //   );
+  // }
+
+  // void showInterstitalAd(){
+  //   if (isInterstitailAdLoaded == true){
+  //     FacebookInterstitialAd.showInterstitialAd();
+  //   }
+  //   else{
+  //     print('flutter ads yet not loaded');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -248,9 +276,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: GestureDetector(
                             onTap: () async {
-                              // ShowFbInterstitalAds().showInterstitalAd();
-                              InterstitialAdDisplayHelper()
-                                  .showForwardInterstitialAd();
+                              ShowFbInterstitalAds().showInterstitalAd();
+                              // InterstitialAdDisplayHelper().showForwardInterstitialAd();
 
                               var val = name[index];
 

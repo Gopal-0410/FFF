@@ -7,27 +7,29 @@ class ShowFbInterstitalAds {
 
   bool isInterstitailAdLoaded = false;
 
-  void loadInterstitalAd() {
+  void loadInterstitalAd () {
     FacebookInterstitialAd.loadInterstitialAd(
-      placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
-      listener: (result, value) {
-        if (result == InterstitialAdResult.LOADED) {
-          isInterstitailAdLoaded = true;
+        placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
+        listener: (result,value){
+          print('InterstitalAd: $result--->$value');
+          if (result == InterstitialAdResult.LOADED){
+            print('============ Intserstitail Ads Is Loaded =======================');
+            isInterstitailAdLoaded = true;
+          }
+          if (result == InterstitialAdResult.DISMISSED && value['invalidated'] == true){
+            isInterstitailAdLoaded = false;
+            loadInterstitalAd();
+          }
         }
-        if (result == InterstitialAdResult.DISMISSED &&
-            value['invalidated'] == true) {
-          isInterstitailAdLoaded = false;
-          loadInterstitalAd();
-        }
-      },);
+    );
   }
 
-  void showInterstitalAd() {
-    if (isInterstitailAdLoaded == true) {
+  void showInterstitalAd(){
+    if (isInterstitailAdLoaded == true){
       FacebookInterstitialAd.showInterstitialAd();
-    } else {
-      log('flutter ads yet not loaded');
+    }
+    else{
+      print('flutter ads yet not loaded');
     }
   }
-
 }

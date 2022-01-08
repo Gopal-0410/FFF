@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 
 import 'admob_ad_display_helper/admob_app_open_ad_display_helper.dart';
+import 'fb_ad_display_helper/fb_interstitial_ad_display_helper.dart';
 
 class NetworkHelper {
   String url;
@@ -165,13 +166,13 @@ class NetworkHelper {
       sharedPreferences.setString('Fb_Native1', fbNative1);
       sharedPreferences.setString('Fb_RewardedVideo1', fbRewardedVideo1);
       sharedPreferences.setString('Fb_NativeBanner1', fbNativeBanner1);
-      sharedPreferences.setString(
-          'dynamicForwardClickCount', appMainClickCntSwAd);
+      sharedPreferences.setString('dynamicForwardClickCount', appMainClickCntSwAd);
 
       BannerAdDisplayHelper().createBottomBannerAd();
       BannerAdDisplayHelper().createMediumRectangleBannerAd();
       InterstitialAdDisplayHelper().createForwardAdmobInterstitialAdUnit();
       AdmobAppOpenAdDisplayHelper().loadAdmobAppOpenAd();
+      ShowFbInterstitalAds().loadInterstitalAd();
       return Future.value(true);
     } else {
       log('====================================================================================');
