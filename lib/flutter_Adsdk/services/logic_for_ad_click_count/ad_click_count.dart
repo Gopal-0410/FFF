@@ -9,7 +9,12 @@ class AdClickCount {
 
   Future<bool> adClickDecrease() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var staticServerFrwdClick = await prefData.getAppMainClickCntSwAd();
+    String staticServerFrwdClick = await prefData.getAppMainClickCntSwAd();
+
+    if (staticServerFrwdClick == "0") {
+      return true;
+    }
+
     staticForwardClickCount = int.parse(staticServerFrwdClick);
     dynamicForwardClickCount = await prefData.appDynamicForwardClick();
 

@@ -199,7 +199,7 @@ class SharedPreferencesDataGetter {
     return Future.value(status);
   }
 
-  Future getAppMainClickCntSwAd() async {
+  Future<String> getAppMainClickCntSwAd() async {
     String? status;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     status = sharedPreferences.getString('app_mainClickCntSwAd');
