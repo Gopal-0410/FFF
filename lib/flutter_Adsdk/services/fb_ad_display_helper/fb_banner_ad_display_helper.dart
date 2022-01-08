@@ -17,8 +17,8 @@ class _ShowStandardFbBannerAdState extends State<ShowStandardFbBannerAd> {
   FbAdHelper fbAdHelperVariable = FbAdHelper();
 
   Future<String> check() async {
+    print('Here banner ads show =========> ');
     fbAdUnitId = await fbAdHelperVariable.fbAdUnitId;
-
     return fbAdUnitId!;
   }
 
