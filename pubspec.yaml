@@ -11,13 +11,14 @@ environment:
 dependencies:
   connectivity: ^3.0.6
   cupertino_icons: ^1.0.2
+  facebook_audience_network: ^1.0.1
   flutter:
     sdk: flutter
+  google_mobile_ads: ^1.0.1
   http: ^0.13.4
+  native_admob_flutter: ^1.5.0
   share: ^2.0.4
   shared_preferences: ^2.0.11
-  google_mobile_ads: ^1.0.1
-  facebook_audience_network: ^1.0.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0

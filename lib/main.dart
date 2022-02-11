@@ -13,17 +13,16 @@ import 'package:fff/screens/starts_screen.dart';
 import 'package:fff/screens/trending_screen.dart';
 import 'package:flutter/material.dart';
 import '../flutter_Adsdk/services/internet_connection.dart';
-
 import 'flutter_Adsdk/services/network_helper.dart';
-
 import 'screens/dialogbox.dart';
 import 'screens/end_screen.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart' as google;
+import 'package:native_admob_flutter/native_admob_flutter.dart' as native;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-//  await SharedPreferencesDataGetter().getAdmobAppOpenId();
+  await google.MobileAds.instance.initialize();
+  await native.MobileAds.initialize();
 
   runApp(const MyApp());
 }

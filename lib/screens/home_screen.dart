@@ -1,13 +1,11 @@
 import 'dart:developer';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
+import 'package:fff/flutter_Adsdk/services/admob_ad_display_helper/admob_native_ad.dart/admob_native_ad_display_helper.dart';
 import 'package:fff/flutter_Adsdk/services/admob_ad_display_helper/interstitial_ad_display_helper.dart';
 import 'package:fff/flutter_Adsdk/services/fb_ad_display_helper/fb_banner_ad_display_helper.dart';
 import 'package:fff/flutter_Adsdk/services/share_preferences_data_getter.dart';
-
 import '../flutter_Adsdk/services/admob_ad_display_helper/banner_ad_display_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../flutter_Adsdk/services/fb_ad_display_helper/fb_interstitial_ad_display_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,15 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
- bool isInterstitailAdLoaded = false;
+  bool isInterstitailAdLoaded = false;
 
   @override
   void initState() {
     super.initState();
     FacebookAudienceNetwork.init(
         testingId: '6524241f-5030-4598-8869-f74193bdd128');
-   // loadInterstitalAd();
+    // loadInterstitalAd();
   }
 
   @override
@@ -44,27 +41,26 @@ class _HomeScreenState extends State<HomeScreen> {
     //  InterstitialAdDisplayHelper().admobInterstitialAdUnitId1Dispose();
   }
 
-  void loadInterstitalAd (){
+  void loadInterstitalAd() {
     FacebookInterstitialAd.loadInterstitialAd(
         placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
-        listener: (result,value){
+        listener: (result, value) {
           print('InterstitalAd: $result--->$value');
-          if (result == InterstitialAdResult.LOADED){
+          if (result == InterstitialAdResult.LOADED) {
             isInterstitailAdLoaded = true;
           }
-          if (result == InterstitialAdResult.DISMISSED && value['invalidated'] == true){
+          if (result == InterstitialAdResult.DISMISSED &&
+              value['invalidated'] == true) {
             isInterstitailAdLoaded = false;
             loadInterstitalAd();
           }
-        }
-    );
+        });
   }
 
-  void showInterstitalAd(){
-    if (isInterstitailAdLoaded == true){
+  void showInterstitalAd() {
+    if (isInterstitailAdLoaded == true) {
       FacebookInterstitialAd.showInterstitialAd();
-    }
-    else{
+    } else {
       print('flutter ads yet not loaded');
     }
   }
@@ -243,19 +239,24 @@ class _HomeScreenState extends State<HomeScreen> {
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
-              Container(
-                child: BannerAdDisplayHelper().isMediumRectangleBannerAdloaded()
-                    ? SizedBox(
-                        height: BannerAdDisplayHelper()
-                            .mediumRectangleBannerHeight(),
-                        width: BannerAdDisplayHelper()
-                            .mediumRectangleBannerWidth(),
-                        child: AdWidget(
-                            ad: BannerAdDisplayHelper()
-                                .mediumRectangleBannerAd()),
-                      )
-                    : null,
+              const SizedBox(
+                height: 330,
+                child: NativeAds(),
               ),
+              // Container(
+              //   child:
+              //    BannerAdDisplayHelper().isMediumRectangleBannerAdloaded()
+              //       ? SizedBox(
+              //           height: BannerAdDisplayHelper()
+              //               .mediumRectangleBannerHeight(),
+              //           width: BannerAdDisplayHelper()
+              //               .mediumRectangleBannerWidth(),
+              //           child: AdWidget(
+              //               ad: BannerAdDisplayHelper()
+              //                   .mediumRectangleBannerAd()),
+              //         )
+              //       : null,
+              // ),
               SizedBox(
                 height: (MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height) *
@@ -276,8 +277,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: GestureDetector(
                             onTap: () async {
-                             // showInterstitalAd();
-                              // InterstitialAdDisplayHelper().showForwardInterstitialAd();
+                              showInterstitalAd();
+                              InterstitialAdDisplayHelper()
+                                  .showForwardInterstitialAd();
 
                               var val = name[index];
 
@@ -304,9 +306,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              const Expanded(
-                child: ShowStandardFbBannerAd(),
-              ),
+              // const Expanded(
+              //   child: ShowStandardFbBannerAd(),
+              // ),
             ],
           ),
         ),
